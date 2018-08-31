@@ -10,10 +10,10 @@ class ActionHandler {
     // addArgsbyselect(){
 
     // }
-    addArgsbyid(id) {
-        var value = $('#' + id).val();
-        this.addArgs(id, value);
-    }
+    // addArgsbyid(id) {
+    //     var value = $('#' + id).val();
+    //     this.addArgs(id, value);
+    // }
     addArgsbyid(data) {
         var value = $('#' + data).val();
         this.addArgs(data, value);

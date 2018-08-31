@@ -82,6 +82,7 @@ class user_profile_show_update_page extends ActionHandler {
     </form>
 `;
                 document.getElementById(this.position_id).innerHTML = msg;
+                this.loadModuleScript("user_profile", "do_update_action");
             }
             else {
 

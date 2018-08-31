@@ -10,11 +10,11 @@
             if(isset($_SESSION['useracc'])){
 			$user=$_SESSION['userid'];
 		    }
-		    $get_user_info = new user_profile_model();
-            $user_info = $get_user_info->get_user_info($user);
+		    $user_model = new user_profile_model();
+            $user_info = $user_model->get_user_info($user);
             $return_value['data_set']=$user_info['data_set'];
             if($user_info['data_set'] != null){
-                $return_value['status_code']= 0;
+                $return_value['status_code']=0;
             }else{
                 $return_value['status_code']=2;
             }
@@ -23,3 +23,4 @@
     }
     
 ?>
+

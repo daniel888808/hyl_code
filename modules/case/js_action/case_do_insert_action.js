@@ -5,7 +5,7 @@ class case_show_select_page extends ActionHandler {
     }
     prepareArgs() {
         this.php = true;
-        this.php_action = 'show_select_page';
+        this.php_action = 'show_select_action';
         // var value = $('input[name=id]:checked').val();
         // this.addArgs('where_statement', 'id = ' + value);
     }
@@ -37,7 +37,9 @@ class case_show_select_page extends ActionHandler {
                                 <tr>
                                     <th class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">${ds[0]['start_datetime']} </a></th>
                                     <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">${ds[0]['title']} </a></td>
-                                    <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()"><i class = "fa fa-check light-blue-text" aria-hidden="true"></a></i></td>
+                                    <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">
+                                        <i class = "fa fa-check light-blue-text" aria-hidden="true"></a></i>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="py-1 fontsm">${ds[0]['start_datetime']}</th>

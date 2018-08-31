@@ -5,15 +5,18 @@ class user_profile_do_update_action extends ActionHandler {
     }
     prepareArgs() {
         this.php = true;
-        this.addArgsById('name');
-        this.addArgsById('cp');
-        this.addArgsById('address');
-        this.addArgsById('phonenum');
-        this.addArgsById('email');
-        this.addArgsById('password');
+        this.addArgsbyid('name');
+        this.addArgsbyid('cp');
+        this.addArgsbyid('address');
+        this.addArgsbyid('phonenum');
+        this.addArgsbyid('email');
+        this.addArgsbyid('password');
     }
-    ajax_success(json_str) {
-        $('#' + this.position_id).html(json_str);
+    ajax_success(xhttp) {
+        //$('#' + this.position_id).html(json_str);
+        var json_str = xhttp.responseText;
+        var obj = JSON.parse(json_str);
+        console.log(obj['status_code']);
     }
     ajax_error(msg) {
         console.log(msg.status);

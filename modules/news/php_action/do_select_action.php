@@ -5,7 +5,7 @@
     class do_select_action implements action_listener{
         public function actionPerformed(event_message $em) {
             $conn = PDO_mysql::getConnection();
-            $sql = "SELECT * FROM `announcement`";
+            $sql = "SELECT * FROM `announcement` order by date desc";
             $post = $em->getPost();
             $id=$_SESSION['user'];
             

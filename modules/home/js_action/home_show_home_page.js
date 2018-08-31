@@ -1,7 +1,8 @@
 class home_show_home_page extends ActionHandler {
-    constructor(module, action, position_id) {
+    constructor(module, action, position_id, notice) {
         super(module, action);
         this.position_id = position_id;
+        this.notice = notice;
         //alert("home in");
     }
     prepareArgs() {
@@ -11,7 +12,21 @@ class home_show_home_page extends ActionHandler {
         try {
             var json_str = xhttp.responseText;
             var obj = JSON.parse(json_str);
+
+            this.loadModuleScript("news", "do_select_action");
+            this.loadModuleScript("repair", "show_repair_page");
+            this.loadModuleScript("notice", "show_time_confirmation_page");
+            this.loadModuleScript("notice", "show_select_page");
+            this.loadModuleScript("notice", "show_notice_page");
+            this.loadModuleScript("user_profile", "show_update_page");
+            this.loadModuleScript("case", "do_select_action");
+            this.loadModuleScript("login", "do_logout_action");
+            this.loadModuleScript("case", "show_select_page");
+
+
+
             if (obj['status_code'] === 1) {
+                (new news_do_select_action('news', 'do_select_action', 'news')).run();
                 var str = `
                 <header>
         <!-- Navbar -->
@@ -39,100 +54,29 @@ class home_show_home_page extends ActionHandler {
         <!-- /.Navbar -->
     </header>
                 
-                
+    <div onload="(new news_do_select_action('news', 'do_select_action', 'news')).run();"></div>            
     <div class="tab-content px-0 mt-3">
         <div class="tab-pane fade in show active" id="fix" role="tabpanel">
             <div class="container pl-1 pr-0 mt-2">
                  <div class="mt-1">
-                    <button type="button"  class="btn btn-ins m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Hydropowerrepair')).run()"><i class="fa fa-s15" aria-hidden="true"></i></br>水電<br>報修</button>
-                    <button type="button"  class="btn btn-cyan m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','ElectricalEngineering')).run()"><i class="fa fa-desktop" aria-hidden="true"></i></br>電機<br>相關</button>
-                    <button type="button"  class="btn btn-indigo m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Installationwork')).run()"><i class="fa fa-wrench" aria-hidden="true" ></i></br>安裝<br>工程</button>
+                    <button type="button"  class="btn btn-ins m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Hydropowerrepair','1')).run()"><i class="fa fa-s15" aria-hidden="true"></i></br>水電<br>報修</button>
+                    <button type="button"  class="btn btn-cyan m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','ElectricalEngineering','2')).run()"><i class="fa fa-desktop" aria-hidden="true"></i></br>電機<br>相關</button>
+                    <button type="button"  class="btn btn-indigo m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Installationwork','3')).run()"><i class="fa fa-wrench" aria-hidden="true" ></i></br>安裝<br>工程</button>
                 </div>
                 <div class="mt-1">
-                    <button type="button"  class="btn btn-teal darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Publicmaintenance')).run()"><i class="fa fa-building" aria-hidden="true" ></i></br>公設<br>維修</button>
-                    <button type="button"  class="btn btn-red m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Furnituremaintenance')).run()"><i class="fa fa-bed" aria-hidden="true" ></i></br>家具<br>維修</button> 
-                    <button type="button"  class="btn btn-deep-purple darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','CleaningServices')).run()"><i class="fa fa-bug" aria-hidden="true" ></i></br>清潔<br>服務</button>
+                    <button type="button"  class="btn btn-teal darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Publicmaintenance','4')).run()"><i class="fa fa-building" aria-hidden="true" ></i></br>公設<br>維修</button>
+                    <button type="button"  class="btn btn-red m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Furnituremaintenance','5')).run()"><i class="fa fa-bed" aria-hidden="true" ></i></br>家具<br>維修</button> 
+                    <button type="button"  class="btn btn-deep-purple darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','CleaningServices','6')).run()"><i class="fa fa-bug" aria-hidden="true" ></i></br>清潔<br>服務</button>
                 </div>
                 <div class="mt-1">
-                    <button type="button"  class="btn btn-warning m-0 w-49" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Paintingworks')).run()"><i class="fa fa-paint-brush" aria-hidden="true" ></i></br>油漆工程</button>
-                    <button type="button"  class="btn btn-pink m-0 w-49" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Other')).run()"><i class="fa fa-info" aria-hidden="true" ></i></br>其他維修</button>
+                    <button type="button"  class="btn btn-warning m-0 w-49" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Paintingworks','7')).run()"><i class="fa fa-paint-brush" aria-hidden="true" ></i></br>油漆工程</button>
+                    <button type="button"  class="btn btn-pink m-0 w-49" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Other','8')).run()"><i class="fa fa-info" aria-hidden="true" ></i></br>其他維修</button>
                 </div>
 
 
             </div>
-
-            <div class="container-fluid text-left maxHeight" id="news">
-                <div class="row">
-                    <div class="col-12">
-                        <a href="http://www.huayulien.com/%E8%8F%AF%E5%8F%8B%E8%81%AF%E5%AE%B6%E6%97%8F%E5%B0%88%E5%B1%AC%F0%9F%92%95%E6%AF%8D%E8%A6%AA%E7%AF%80%E7%8F%8D%E6%84%9B%E5%B0%88%E6%A1%88/">
-                            <div class="row mt-2">
-                                <div class="col px-0">
-                                    <div class="row border boxShadow mx-1 h-60">
-                                        <div class="col-5 px-0">
-                                            <img src="../include/lib/img/01.png" alt="" srcset="" width="85px" height="80px">
-                                        </div>
-                                        <div class="col-7 pl-0 pr-1 my-0">
-                                            <h6 class="font-weight-bold my-1">
-                                                華友聯家族專屬💕母親節珍愛專案
-                                            </h6>
-                                            <p class="mb-0">
-                                                愛她，照護她的健康讓媽咪New一下...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <a href="http://www.huayulien.com/%E9%9D%92%E5%AE%89%E8%B2%B8%E6%AC%BE%E7%A2%BA%E5%AE%9A%E5%B0%87%E5%BB%B6%E8%87%B32018%E5%B9%B4%E5%BA%95/">
-                            <div class="row mt-2">
-                                <div class="col px-0">
-                                    <div class="row border boxShadow mx-1 h-60">
-                                        <div class="col-5 px-0">
-                                            <img src="../include/lib/img/03.png" alt="" srcset="" width="85px" height="80px">
-                                        </div>
-                                        <div class="col-7 pl-0 pr-1 my-0">
-                                            <h6 class="font-weight-bold my-1">
-                                                青安貸款確定將延至2018年底
-                                            </h6>
-                                            <p class="mb-0">
-                                                行政院核定通過，青安貸款確定...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                 
-                <div class="row">
-                    <div class="col-12" id="news1">
-                        <a href="" onclick="(new news_do_select_action('news','do_select_action','body').run())">
-                            <div class="row mt-2">
-                                <div class="col px-0">
-                                    <div class="row border boxShadow mx-1 h-60">
-                                        <div class="col-5 px-0">
-                                            <img src="../include/lib/img/04.png" alt="" srcset="" width="85px" height="80px">
-                                        </div>
-                                        <div class="col-7 pl-0 pr-1 my-0">
-                                            <h6 class="font-weight-bold my-1">
-                                                九年來 我們一直都在…
-                                            </h6>
-                                            <p class="mb-0">
-                                                優質的售後服務 盡在華友聯...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            
+            <div class="container-fluid text-left maxHeight" id="news"></div>
         </div>
     <!-- /.通知 -->
         <div class="tab-pane fade" id="notice" role="tabpanel">
@@ -225,12 +169,12 @@ class home_show_home_page extends ActionHandler {
                         <a href="#fix" class="nav-link waves-light active" data-toggle="tab" role="tab"><i class="fa fa-home  white-text fa-2x" aria-hidden="true"> </i>
                         </br>首頁</a>
                     </li>
-                    <li class="nav-item maxWidth"onclick="(new case_show_select_page('case', 'show_select_page', 'record')).run();">
+                    <li class="nav-item maxWidth" onclick="(new case_show_select_page('case', 'show_select_page', 'record')).run();">
                         <a href="#record" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-history  white-text fa-2x" aria-hidden="true"> </i>
                         </br>紀錄</a>
                     </li>
-                    <li class="nav-item maxWidth" onclick="(new notice_do_select_notice_action('notice','do_select_notice_action ','notice')).run()"> 
-                        <a href="#notice" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-bell white-text fa-2x" aria-hidden="true"></i>
+                    <li class="nav-item maxWidth" onclick="(new notice_show_notice_page('notice','show_notice_page ','notice')).run()"> 
+                        <a href="#notice" id="noticeCheck" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-bell white-text fa-2x" aria-hidden="true"></i>
                         <span class="counter">2</span>
                         </br>通知</a>
                     </li>
@@ -255,16 +199,11 @@ class home_show_home_page extends ActionHandler {
         });
     </script>
                     `;
+
                 document.getElementById(this.position_id).innerHTML = str;
-                this.loadModuleScript("news", "do_select_action");
-                this.loadModuleScript("repair", "show_repair_page");
-                this.loadModuleScript("notice", "show_time_confirmation_page");
-                this.loadModuleScript("notice", "show_repair_completed_page");
-                this.loadModuleScript("notice", "do_select_notice_action");
-                this.loadModuleScript("user_profile", "show_update_page");
-                this.loadModuleScript("case", "do_select_action");
-                this.loadModuleScript("login", "do_logout_action");
-                this.loadModuleScript("case", "show_select_page");
+                if (this.notice) {
+                    $('#noticeCheck').click();
+                }
 
             }
             else if (obj['status_code'] == 2) {

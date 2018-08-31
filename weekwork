@@ -430,16 +430,19 @@ E/case.html維修單預約時間時段(已有日期 加工務主任手動輸入�
 
 <!-----------this week(7/11)-------------!>
 客戶APP
-1.modules/login/js_action/login_show_login_page.js 37
-2.modules/login/js_action/login_do_login_action.js 02
-3.modules/login/php_action/login_do_login_action.php 23
-4.modules/home/js_action/home_show_home_page.js 05
-5.modules/home/php_action/home_show_home_page.php 41
-6.
-7.
-8.
-9.
-10.
+
+login module
+1.modules/login/js_action/login_show_login_page.js
+2.modules/login/js_action/login_do_login_action.js
+3.modules/login/js_action/login_do_logout_action.js
+4.modules/login/php_action/do_login_action.php
+5.modules/login/php_action/do_logout_action.php
+6.modules/login/php_action/login_model.php
+
+home
+4.modules/home/js_action/home_show_home_page.js
+5.modules/home/php_action/show_home_page.php
+
 
 <!-----------this week(7/14)-------------!>
 重新設計模組切割
@@ -468,6 +471,14 @@ jquery引用失敗
 動作
 
 
+<!-----------this week(8/27~)-------------!>
 
 
 
+客戶回報問題應該要放在後台的個別案件的詳細畫面裡:(pc-case_show_case_page)
+沒地方看回報問題
+資料庫裡沒有放簽名的地方(大概會是一個pdf檔)
+工務副理可以看到每月的報表(還沒)(後台畫面的篩選功能?)
+capp的案件列表要抓一定期間(2week~1month?)內的資料(SQL)
+JWT
+一般user的畫面不會有公設按鈕

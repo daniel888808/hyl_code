@@ -2,7 +2,7 @@
     require_once 'include/php/action_listener.php';
     require_once 'include/php/event_message.php';
     
-    class do_select_notice_action implements action_listener{
+    class do_select_action implements action_listener{
         public function actionPerformed(event_message $em) {
             $user=$_SESSION['userid'];
             $conn = PDO_mysql::getConnection();

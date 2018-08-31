@@ -30,7 +30,15 @@ class news_do_select_action extends ActionHandler {
 
 
 
+
+
+
+
         document.getElementById(this.position_id).innerHTML = str;
+
+        //document.getElementById('news1').innerHTML = str;
+        //document.getElementById('news2').innerHTML = str;
+        //document.getElementById('news3').innerHTML = str;
     }
 
 

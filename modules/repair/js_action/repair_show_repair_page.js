@@ -1,16 +1,16 @@
 class repair_show_repair_page extends ActionHandler {
-    constructor(module, action, position_id, repair_type) {
+    constructor(module, action, position_id, repair_type, repair_id) {
         super(module, action);
         this.position_id = position_id;
         this.repair_type = repair_type;
-
+        this.repair_id = repair_id;
     }
     prepareArgs() {
         this.php = true;
         this.php_action = 'do_select_action';
     }
     ajax_success(json_str) {
-        console.log(this.repair_type);
+        console.log(this.repair_id);
         // switch (this.repair_type) {
         //     case 'Hydropowerrepair':
         //         alert('Hydropowerrepair');
@@ -58,7 +58,9 @@ class repair_show_repair_page extends ActionHandler {
         $(document).ready(function() {
             $("select").on("change", function() {
                 var s = $("select[name='select1']").val();
-                alert(s);
+                //alert(s);
+                var r = s;
+                console.log(r);
             });
             $("#progressbarTWInput").change(function() {
                 $("#preview_progressbarTW_imgs").html(""); // 清除預覽
@@ -84,7 +86,7 @@ class repair_show_repair_page extends ActionHandler {
             var txtId = 1;
             //add input block in showBlock
             $("#btn").click(function() {
-                $("#showBlock").append('<div class="row my-0" id="div' + txtId + '"><div class="col-4"><input type="date" class="form-control" name="test[]" id="month1" placeholder="Enter month" /></div><div class="col-3"><input type="text" class="form-control timepicker" name="test[]" id="input_starttime1-1" placeholder="起始時間"/></div><div class="col-3"><input type="text" class="form-control timepicker" name="test[]" id="input_starttime1-2" placeholder="結束時間"/></div><input type="button" value="del" onclick="deltxt(' + txtId + ')"></div></br>');
+                $("#showBlock").append('<div class="row" id="div' + txtId + '"><div class="col-3 p-0"><input type="date" class="form-control" name="test[]" id="month1" placeholder="Enter month" /></div><div class="col-3 p-0"><input type="text" class="form-control timepicker" name="test[]" id="input_starttime1-1" placeholder="起始時間"/></div><div class="col-3 p-0"><input type="text" class="form-control timepicker" name="test[]" id="input_starttime1-2" placeholder="結束時間"/></div><div class="col-3 p-0"><button type="button"  class="btn btn-primary m-0"  style="height:38px" value="del" onclick="deltxt(' + txtId + ')">X</button></div></div></br>');
                 txtId++;
             });
 
@@ -121,20 +123,15 @@ class repair_show_repair_page extends ActionHandler {
                 str += '<select class="mdb-select" name="select1">';
                 for (var index in ds) {
                     if (ds[index]['name'] == this.repair_type) {
-                        str += '<option value="' + ds[index]['id'] + '"  selected>' + ds[index]['name'] + '</option>';
+                        str += '<option value="' + ds[index]['id'] + '"  selected>' + ds[index]['namech'] + '</option>';
                     }
                     else {
-                        str += '<option value="' + ds[index]['id'] + '">' + ds[index]['name'] + '</option>';
+                        str += '<option value="' + ds[index]['id'] + '">' + ds[index]['namech'] + '</option>';
                     }
                 }
                 str += '</select>';
-
-
-
-                str += `</div>
-                                        </div>
-                                        
-                                        <div class="row my-0" id="showBlock">
+                str += `</div></div>
+                        <div class="row my-0" id="showBlock">
                                                 <label for="time" class="font-weight-bold col-12">請輸入您方便的時間<a type="button" id="btn" value="addItem"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
                                                 <div class="col-4">
                                                     <input type="date" class="form-control" id="month1" placeholder="Enter month">
@@ -146,6 +143,7 @@ class repair_show_repair_page extends ActionHandler {
                                                     <input placeholder="結束時間" type="text" id="input_starttime1-2" class="form-control timepicker">
                                                 </div>
                                         </div>
+                                        
                                         <div class="row">
                                             <div class="col-4">
                                                 <label class="font-weight-bold ">待修狀況:</label>
@@ -174,7 +172,7 @@ class repair_show_repair_page extends ActionHandler {
                                     </form>
                                 </div>
                             </div>
-                            
+                                
                             <script>
                                 $(document).ready(function() {
                                     $('.mdb-select').material_select();
@@ -184,7 +182,7 @@ class repair_show_repair_page extends ActionHandler {
                                     autoclose: true,
                                     'default': 'now'
                                 });
-                                // Manually toggle to the minutes view
+                                
                                 $('#check-minutes').click(function(e) {
                                     e.stopPropagation();
                                     input.pickatime('show').pickatime('toggleView', 'minutes');

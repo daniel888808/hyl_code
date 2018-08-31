@@ -6,7 +6,7 @@
     class do_select_action implements action_listener{
         public function actionPerformed(event_message $em) {
             $conn = PDO_mysql::getConnection();
-            $sql = "SELECT id,name FROM `repair_type`";
+            $sql = "SELECT id,name,namech FROM `repair_type`";
             $post = $em->getPost();
             $stmt = $conn->prepare($sql);
             $result = $stmt->execute();
