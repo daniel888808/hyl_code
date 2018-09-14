@@ -4,9 +4,9 @@
     
     class show_select_page implements action_listener{
         public function actionPerformed(event_message $em) {
-            $user_id=$_SESSION['user'];
+            $user_id=$_SESSION['userid'];
             $conn = PDO_mysql::getConnection();
-            $sql = "SELECT * FROM `case_profile` A JOIN `notice` B ON B.case_profile_id=A.id JOIN household_user C ON A.household_user_id=C.id JOIN user_profile D ON C.user_profile_id=D.id WHERE D.id=$user_id";
+            $sql = "SELECT * FROM `case_profile` A WHERE A.household_user_id=$user_id";
             $post = $em->getPost();
             $stmt = $conn->prepare($sql);
             $result = $stmt->execute();

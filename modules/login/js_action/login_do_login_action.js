@@ -21,6 +21,9 @@ class login_do_login_action extends ActionHandler {
                 //document.getElementById(this.position_id).innerHTML = str;
                 (new home_show_home_page('home', 'show_home_page', 'body')).run();
             }
+            else if (obj['status_code'] === 1) {
+                (new home_show_home_page_E('home', 'show_home_page', 'body')).run();
+            }
             else if (obj['status_code'] === -100) {
                 document.getElementById("login_err_msg").innerHTML = `<div><p class="font-small white-text d-flex justify-content-end"></p> <a href="#" class="gray-text ml-1 font-weight-bold">忘記密碼?</a></div><p class="red-text">帳號或密碼錯誤</p>`;
                 //alert("帳號或密碼錯誤");

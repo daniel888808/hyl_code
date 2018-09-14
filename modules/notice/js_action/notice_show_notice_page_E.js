@@ -1,4 +1,4 @@
-class notice_show_notice_page extends ActionHandler {
+class notice_show_notice_page_E extends ActionHandler {
     constructor(module, action, position_id) {
         super(module, action);
         this.position_id = position_id;

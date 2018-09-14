@@ -1,12 +1,16 @@
 class notice_show_select_page extends ActionHandler {
-    constructor(module, action, position_id, id, type, title, content, end_datetime) {
+    constructor(module, action, position_id, id, type, title, repair_title, content, repairCompany, end_datetime, building_header, building_footer) {
         super(module, action);
         this.position_id = position_id;
         this.id = id;
         this.type = type;
         this.title = title;
+        this.repair_title = repair_title;
         this.content = content;
+        this.repairCompany = repairCompany;
         this.end_datetime = end_datetime;
+        this.building = building_header + " " + building_footer;
+        console.log(this.building);
     }
     prepareArgs() {
         this.php = false;
@@ -35,19 +39,21 @@ class notice_show_select_page extends ActionHandler {
 
         </div>
         <div class="col-12 mt-2 font-weight-bold">
-            維修項目:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.title}">
+            維修問題:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.title}">
             <!--<label>Example label</label> -->
         </div>
         <div class="col-12 mt-2 font-weight-bold">
-            待修狀況:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="壁癌">
+            當前維修項目:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.repair_title}">
             <!--<label>Example label</label> -->
         </div>
         <div class="col-12 mt-2 font-weight-bold">
-            維修內容:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.content}">
+            維修內容:
+              <textarea type="text" id="materialFormContactMessageEx" class="form-control" style="background-color:#e9ecef" rows="4" readonly="readonly">${this.content}</textarea>
+               
             <!--<label>Example label</label> -->
         </div>
         <div class="col-12 mt-2 font-weight-bold">
-            地點:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="舞樂天B5-5">
+            地點:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.building}">
             <!--<label>Example label</label> -->
         </div>
         <div class="col-12 mt-2 font-weight-bold">
@@ -55,7 +61,7 @@ class notice_show_select_page extends ActionHandler {
             <!--<label>Example label</label> -->
         </div>
         <div class="col-12 mt-2 font-weight-bold">
-            維修廠商:<input type="text" class="form-control my-0" id="month1" placeholder="Enter month" readonly="readonly" value="格林電機">
+            維修廠商:<input type="text" class="form-control my-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.repairCompany}">
             <!--<label>Example label</label> -->
         </div>
         <div class="col-12 mt-2 font-weight-bold">
@@ -108,32 +114,30 @@ class notice_show_select_page extends ActionHandler {
         <div class="col-12 border boxShadow rounded p-3">
             <p class="h5">報修取消通知</p>
             <p class="h6">我們將幫您取消維修服務</p>
-            <div class="font-weight-bold">
+            <div class="fclass="mt-1 font-weight-bold"">
                 時間:
                 <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.end_datetime}">
             </div>
             <div class="mt-1 font-weight-bold">
                 維修項目:
-                <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.title}">
-                <!--<label>Example label</label> -->
+                <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.repair_title}">
             </div>
             <div class="mt-1 font-weight-bold">
                 維修原因:
-                <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.content}">
-                <!--<label>Example label</label> -->
+                <textarea type="text" id="materialFormContactMessageEx" class="form-control" style="background-color:#e9ecef" rows="4" readonly="readonly">${this.content}</textarea>
             </div>
             <div class="mt-1 font-weight-bold">
                 地點:
-                <input type="text" class="form-control my-0 pb-0" id="month1 " placeholder="Enter month " readonly="readonly" value="舞樂天B5-5 ">
+                <input type="text" class="form-control my-0 pb-0" id="month1 " placeholder="Enter month " readonly="readonly" value="${this.building}">
                 <!--<label>Example label</label> -->
             </div>
             <div class="mt-1 font-weight-bold">
                 維修廠商:
-                <input type="text" class="form-control my-0 pb-0" id="month1 " placeholder="Enter month " readonly="readonly" value="洪彬水電 ">
+                <input type="text" class="form-control my-0 pb-0" id="month1 " placeholder="Enter month " readonly="readonly" value="${this.repairCompany}">
                 <!--<label>Example label</label> -->
             </div>
         </div>
-            <button type="button " class="btn btn-primary rounded" onclick="(new home_show_home_page('home','show_home_page','body')).run()">確認</button>
+            <button type="button " class="btn btn-primary rounded" onclick="(new home_show_home_page('home','show_home_page','body','notice')).run()">確認</button>
     </div>
 </div>
 
@@ -163,33 +167,32 @@ class notice_show_select_page extends ActionHandler {
             <p class="h6">我們將會在以下時間為您服務</p>
             <div class="font-weight-bold">
                 時間:
-                <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.end_datetime}">
+                <input type="text" class="form-control my-0 pb-0" placeholder="Enter month" readonly="readonly" value="${this.end_datetime}">
             </div>
             <div class="mt-1 font-weight-bold">
-                維修項目:
-                <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.title}">
-                <!--<label>Example label</label> -->
+                維修問題:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.title}">
             </div>
             <div class="mt-1 font-weight-bold">
-                維修原因:
-                <input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.content}">
-                <!--<label>Example label</label> -->
+                當前維修項目:<input type="text" class="form-control my-0 pb-0" id="month1" placeholder="Enter month" readonly="readonly" value="${this.repair_title}">
+            </div>
+            <div class="mt-1 font-weight-bold">
+                維修內容:<textarea type="text" id="materialFormContactMessageEx" class="form-control" style="background-color:#e9ecef" rows="4" readonly="readonly">${this.content}</textarea>
             </div>
             <div class="mt-1 font-weight-bold">
                 地點:
-                <input type="text" class="form-control my-0 pb-0" id="month1 " placeholder="Enter month " readonly="readonly" value="舞樂天B5-5 ">
+                <input type="text" class="form-control my-0 pb-0" placeholder="Enter month " readonly="readonly" value="${this.building}">
                 <!--<label>Example label</label> -->
             </div>
             <div class="mt-1 font-weight-bold">
                 維修廠商:
-                <input type="text" class="form-control my-0 pb-0" id="month1 " placeholder="Enter month " readonly="readonly" value="洪彬水電 ">
+                <input type="text" class="form-control my-0 pb-0" placeholder="Enter month " readonly="readonly" value="${this.repairCompany}">
                 <!--<label>Example label</label> -->
             </div>
         </div>
-            <button type="button " class="btn btn-primary rounded" onclick="(new home_show_home_page('home','show_home_page','body')).run()">確認</button>
-        <a href="testindex.html ">
+            <button type="button " class="btn btn-primary rounded" onclick="(new home_show_home_page('home','show_home_page','body','notice')).run()">確認</button>
+        
             <button type="button " class="btn btn-danger rounded ">取消維修</button>
-        </a>
+        
     </div>
 </div>
 

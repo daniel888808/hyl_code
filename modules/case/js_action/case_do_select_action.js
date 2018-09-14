@@ -1,12 +1,15 @@
 class case_do_select_action extends ActionHandler {
-    constructor(module, action, position_id) {
+    constructor(module, action, position_id, case_id) {
         super(module, action);
         this.position_id = position_id;
+        this.case_id = case_id;
+
     }
     prepareArgs() {
         this.php = true;
         this.php_action = 'do_select_action';
-        // var value = $('input[name=id]:checked').val();
+        console.log(this.case_id);
+        this.addArgs('cid', this.case_id)
         // this.addArgs('where_statement', 'id = ' + value);
     }
     ajax_success(json_str) {
@@ -20,7 +23,7 @@ class case_do_select_action extends ActionHandler {
                <header>
                             <!-- Navbar -->
                             <nav class="navbar bgdark text-white">
-                                <div onclick="(new home_show_home_page('home','show_home_page','body')).run()">
+                                <div onclick="(new home_show_home_page('home','show_home_page','body','record')).run()">
                                 <i class="fa fa-chevron-left text-white" aria-hidden="true"></i>
                                 </div>
                                 <span class="h6 m-auto pr-3 py-2"> 維修單</span>
@@ -34,7 +37,10 @@ class case_do_select_action extends ActionHandler {
                 <!--Textarea with icon prefix-->
                 <div class="md-form my-0">
                     <label for="textareaPrefix" class="mb-0">你的狀況</label>
-                    <i class="fa fa-pencil prefix"></i>
+                    <i class="fa fa-pencil prefix"></i>`;
+
+
+                content += `
                     <textarea type="text" id="textareaPrefix" class="form-control md-textarea my-0" rows="3" readonly="readonly">${ds[0]['content']}</textarea>
 						</div>
 						      <label for="time" class="mt-1">您方便的時間:</label>
@@ -43,7 +49,14 @@ class case_do_select_action extends ActionHandler {
                 content += "<div>維修內容:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['title'] + "'></div>";
                 content += "<div>工時:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['worktime'] + "'></div></br>";
                 content += "<div>維修狀態追蹤:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['status'] + "'></div>";
-                content += `<div>評分:</div>
+
+
+
+                if (ds[0]['rank'] == null) {
+                    content += ``;
+                }
+                else {
+                    content += `<div>評分:</div>
                         <div>
                             <!--沒辦法就暫時用這個簡單版的 -->
                             <span class="fa fa-star checked"></span>
@@ -54,13 +67,13 @@ class case_do_select_action extends ActionHandler {
                             <!--沒辦法就暫時用這個簡單版的 -->
                         </div>
                             
-                            
-                    
+                            `;
 
-
-                    <a onclick="(new home_show_home_page('home','show_home_page','body','Hydropowerrepair')).run()"><button type="button" class="btn btn-primary mt-3">確定</button></a>
+                }
+                content += `
+                    <a onclick="(new home_show_home_page('home','show_home_page','body','record')).run()"><button type="button" class="btn btn-primary mt-3">確定</button></a>
                     
-                    <a href="contact.html"><button type="button" class="btn btn-warning mt-3">回報問題</button></a>
+                    
                     </form>
                     </div>
                     </div>

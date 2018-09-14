@@ -13,10 +13,12 @@ class user_profile_do_update_action extends ActionHandler {
         this.addArgsbyid('password');
     }
     ajax_success(xhttp) {
+        console.log("in_u_update");
         //$('#' + this.position_id).html(json_str);
         var json_str = xhttp.responseText;
-        var obj = JSON.parse(json_str);
-        console.log(obj['status_code']);
+        //var obj = JSON.parse(json_str);
+        console.log(json_str);
+        document.getElementById(this.position_id).innerHTML = json_str;
     }
     ajax_error(msg) {
         console.log(msg.status);

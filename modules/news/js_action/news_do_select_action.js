@@ -21,7 +21,7 @@ class news_do_select_action extends ActionHandler {
 
             str += '<div class="row"><div class="col-12"><a href=""><div class="row mt-2"><div class="col px-0"><div class="row border boxShadow mx-1 h-60"><div class="col-5 px-0">';
             str += '<img src="../include/lib/img/03.png" alt="" srcset="" width="85px" height="80px"></div><div class="col-7 pl-0 pr-1 my-0"><h6 class="font-weight-bold my-1">';
-            str += obj['data_set'][i]['topic'] + '</h6><p class="mb-0">' + obj['data_set'][i]['content'] + '</p></div></div></div></div></a></div></div>';
+            str += ds[i]['topic'] + '</h6><p class="mb-0">' + ds[i]['content'] + '</p></div></div></div></div></a></div></div>';
 
 
         }

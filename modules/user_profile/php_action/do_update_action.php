@@ -1,6 +1,7 @@
 <?php
     require_once 'include/php/action_listener.php';
     require_once 'include/php/event_message.php';
+    require_once 'modules/user_profile/php_action/user_profile_model.php';
     //require_once 'include/php/PDO_mysql.php';
     
     class do_update_action implements action_listener{
@@ -29,7 +30,7 @@
                 $msg = "更新失敗";
                 $return_value['status_code']=2;
             }
-            return json_encode($return_value);
+            return $return_value;
         }
     }
     

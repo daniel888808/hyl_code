@@ -308,7 +308,7 @@ e_progress add time
                     show_user_list.php
                 repair_company_type
                 
-///要分三個
+///要分三個 
 <-----------客戶APP------------->
 1. 登入模組(household_profile)
     login_page
@@ -479,6 +479,27 @@ jquery引用失敗
 沒地方看回報問題
 資料庫裡沒有放簽名的地方(大概會是一個pdf檔)
 工務副理可以看到每月的報表(還沒)(後台畫面的篩選功能?)
-capp的案件列表要抓一定期間(2week~1month?)內的資料(SQL)
 JWT
 一般user的畫面不會有公設按鈕
+
+<!-----------this week(9/10)-------------!>
+通知
+02
+05
+23
+37
+41
+待改 通知字體
+圖片
+jwt
+(名稱用大寫E結尾)
+
+主任 home login 23
+     case(新案件畫面list)  05
+     case畫面23
+     case(搜尋)
+     notice37
+
+     
+
+

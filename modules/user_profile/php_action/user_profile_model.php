@@ -9,7 +9,8 @@
             parent::__construct();
         }
         public function get_user_info($user){
-            $sql ="SELECT * FROM `user_profile` JOIN household_user on user_profile.id=household_user.user_profile_id JOIN household_profile ON household_user.household_profile_id=household_profile.id JOIN construction_project ON household_profile.construction_project_id=construction_project.id WHERE user_profile.id=$user";
+            $sql ="SELECT * FROM `user_profile` JOIN household_user on user_profile.id=household_user.user_profile_id JOIN household_profile ON household_user.household_profile_id=household_profile.id  WHERE user_profile.id=$user";
+            //$sql="SELECT * FROM `user_profile` WHERE user_profile.id=$user";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchall();
@@ -19,7 +20,7 @@
             return $return_value;
 
         }
-        public function update_user_info($name,$cp,$phone,$email,$password,$user){
+        public function update_user_info($name,$phone,$email,$password,$user){
             $sql="UPDATE user_profile SET name=:name, phone=:phone, account=:email, password=:password Where user_profile.id=$user";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(array(':name'=>$name, ':phone'=>$phone, ':email'=>$email ,':password'=>$password));

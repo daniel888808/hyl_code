@@ -1,9 +1,9 @@
 class home_show_home_page extends ActionHandler {
-    constructor(module, action, position_id, notice) {
+    constructor(module, action, position_id, blank) {
         super(module, action);
         this.position_id = position_id;
-        this.notice = notice;
-        //alert("home in");
+        this.blank = blank;
+
     }
     prepareArgs() {
         this.php = true;
@@ -23,10 +23,13 @@ class home_show_home_page extends ActionHandler {
             this.loadModuleScript("login", "do_logout_action");
             this.loadModuleScript("case", "show_select_page");
 
-
+            
 
             if (obj['status_code'] === 1) {
                 (new news_do_select_action('news', 'do_select_action', 'news')).run();
+
+
+
                 var str = `
                 <header>
         <!-- Navbar -->
@@ -54,7 +57,7 @@ class home_show_home_page extends ActionHandler {
         <!-- /.Navbar -->
     </header>
                 
-    <div onload="(new news_do_select_action('news', 'do_select_action', 'news')).run();"></div>            
+                
     <div class="tab-content px-0 mt-3">
         <div class="tab-pane fade in show active" id="fix" role="tabpanel">
             <div class="container pl-1 pr-0 mt-2">
@@ -92,72 +95,7 @@ class home_show_home_page extends ActionHandler {
 
         <!-- /.紀錄 -->
         <div class="tab-pane fade" id="record" role="tabpanel">
-            <div class="container">
-                <div class="row " id="min-h">
-                    <div class="col-12 px-0">
-                        <table class="table table-striped text-center mt-3">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="py-1 font-weight-bold h6">維修日期 </th>
-                                    <th scope="col" class="py-1 font-weight-bold h6">維修事項</th>
-                                    <th scope="col" class="py-1 font-weight-bold h6" style="width:120px">維修狀況</th>
-                                </tr>
-                            </thead>
-                            <tshow_area>
-                                <tr>
-                                    <th class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">2018/02/11 </a></th>
-                                    <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">壁癌處理 </a></td>
-                                    <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">
-                                        <i class = "fa fa-check light-blue-text" aria-hidden="true"></a></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="py-1 fontsm" ><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">2018/02/02</a></th>
-                                    <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">油漆工程</a></td>
-                                    <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body')).run()">
-                                        <i class="fa fa-check light-blue-text" aria-hidden="true"></a></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="py-1 fontsm">2018/01/03</th>
-                                    <td class="py-1 fontsm">水電處理</td>
-                                    <td class="py-1 fontsm">
-                                        <i class="fa fa-check light-blue-text" aria-hidden="true"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="py-1 fontsm">2017/12/04</th>
-                                    <td class="py-1 fontsm">電器處理</td>
-                                    <td class="py-1 fontsm">
-                                        <i class="fa fa-check light-blue-text" aria-hidden="true"></i>
-                                    </td>
-                                </tr>
-                                <tr=>
-                                    <th class="py-1 fontsm">2017/11/05</th>
-                                    <td class="py-1 fontsm">家具維修</td>
-                                    <td class="py-1 fontsm">
-                                        <i class="fa fa-check light-blue-text" aria-hidden="true"></i>
-                                    </td>
-                                </tr>
-                                <tr=>
-                                    <th class="py-1 fontsm">2017/11/01</th>
-                                    <td class="py-1 fontsm">其他維修</td>
-                                    <td class="py-1 fontsm">
-                                        <i class="fa fa-check light-blue-text" aria-hidden="true"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="py-1 fontsm">2017/10/17</th>
-                                    <td class="py-1 fontsm">其他維修</td>
-                                    <td class="py-1 fontsm">
-                                        <i class="fa fa-check light-blue-text" aria-hidden="true"></i>
-                                    </td>
-                                </tr>
-                            </tshow_area>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
     
@@ -166,15 +104,15 @@ class home_show_home_page extends ActionHandler {
             <div class="tabs-wrapper">
                 <ul class="nav classic-tabs tabs-dark pl-3" role="tablist">
                     <li class="nav-item maxWidth" onclick="(new news_do_select_action('news', 'do_select_action', 'news')).run();">
-                        <a href="#fix" class="nav-link waves-light active" data-toggle="tab" role="tab"><i class="fa fa-home  white-text fa-2x" aria-hidden="true"> </i>
+                        <a href="#fix" id="homeb" class="nav-link waves-light active" data-toggle="tab" role="tab"><i class="fa fa-home  white-text fa-2x" aria-hidden="true"> </i>
                         </br>首頁</a>
                     </li>
                     <li class="nav-item maxWidth" onclick="(new case_show_select_page('case', 'show_select_page', 'record')).run();">
-                        <a href="#record" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-history  white-text fa-2x" aria-hidden="true"> </i>
+                        <a href="#record" id="recordb" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-history  white-text fa-2x" aria-hidden="true"> </i>
                         </br>紀錄</a>
                     </li>
                     <li class="nav-item maxWidth" onclick="(new notice_show_notice_page('notice','show_notice_page ','notice')).run()"> 
-                        <a href="#notice" id="noticeCheck" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-bell white-text fa-2x" aria-hidden="true"></i>
+                        <a href="#notice" id="noticeb" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-bell white-text fa-2x" aria-hidden="true"></i>
                         <span class="counter">2</span>
                         </br>通知</a>
                     </li>
@@ -201,9 +139,35 @@ class home_show_home_page extends ActionHandler {
                     `;
 
                 document.getElementById(this.position_id).innerHTML = str;
-                if (this.notice) {
-                    $('#noticeCheck').click();
+
+
+
+
+                switch (this.blank) {
+                    case 'home':
+                        {
+                            $('#homeb').click();
+                            break;
+                        }
+                    case 'record':
+                        {
+                            $('#recordb').click();
+                            break;
+                        }
+                    case 'notice':
+                        {
+                            $('#noticeb').click();
+                            break;
+                        }
+                    default:
+                        {
+                            $('#homeb').click();
+                            break;
+                        }
+
                 }
+
+
 
             }
             else if (obj['status_code'] == 2) {

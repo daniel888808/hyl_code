@@ -8,6 +8,9 @@
         public function actionPerformed(event_message $em) {
             $obj = user_profile_api::check_account($em);
             if($obj['status_code']== 0){ //0為登入成功 -100失敗(帳密錯誤)
+                if($obj['data_set'][0]['id']==4){
+                    $obj['status_code']= 1;
+                }
                 //return json_encode($obj);
                 /*
                  $tokenId    = base64_encode(openssl_random_pseudo_bytes(32));

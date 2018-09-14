@@ -43,7 +43,8 @@ class user_profile_show_update_page extends ActionHandler {
             <i class="fa fa-home prefix grey-text text-center"></i>
             <label for="exampleForm2">所屬建案</label>
             <input type="text" id="cp" class="form-control"readonly="readonly" value="`;
-                msg += ds[0]['name'];
+                msg += obj['construction_project'];
+                //msg += ds[0]['name'];
                 msg += `">
             
             <!-- Default 住址 -->
