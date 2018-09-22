@@ -1,34 +1,63 @@
 <?php
-    require_once 'include/php/action_listener.php';
-    require_once 'include/php/event_message.php';
+    // require_once 'include/php/action_listener.php';
+    // require_once 'include/php/event_message.php';
+    require_once 'include/php/model.php';
+    //require_once 'include/php/PDO_mysql.php';
     
-    class show_select_action implements action_listener{
-        public function actionPerformed(event_message $em) {
-            $user_id=$_SESSION['user'];
-            $conn = PDO_mysql::getConnection();
-            $sql = "SELECT * FROM `case_profile` A JOIN `repair_type` B ON A.repair_type_id=B.id";
-            $post = $em->getPost();
-            $stmt = $conn->prepare($sql);
-            $result = $stmt->execute();
-            if($result){
-                $ds = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $return_value['status_code'] = 0;
-                $return_value['status_message'] = 'Execute Success';
-                $return_value['data_set'] = $ds;
-                $return_value['sql'] = $sql;
+    class case_model extends model{
+        public function __construct() {
+            parent::__construct();
+        }
+        public function insert_new_case($household_user_id,$repair_type_id,$title, $content,$start_datetime){
+            $sql ="INSERT INTO `case_profile` (`id`, `status`, `household_user_id`, `repair_type_id`, `title`, `content`, `user_rank`, `user_conmment`, `start_datetime`, `end_datetime`) VALUES (NULL, 'unfinish', '$household_user_id', '$repair_type_id', '$title', '$content', NULL, NULL, '$start_datetime', NULL)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+        }
+        
+        public function get_case_id($household_user_id,$start_datetime){
+            $sql ="SELECT id FROM `case_profile` WHERE household_user_id=$household_user_id and start_datetime='$start_datetime'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchall();
+            if ($result != null) {
+                 $return_value = $result;
+             }
+            return $return_value[0][0];
+        }
+        public function get_last_insert(){
+            $sql ="select LAST_INSERT_ID();";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchall();
+            if ($result != null) {
+                 $return_value = $result;
+             }
+            return $return_value[0][0];
+
+        }
+        public function get_something_from_case_profile($something,$where){//從case_profile取
+            $sql ="SELECT ".$something." FROM `case_profile` WHERE $where";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchall();
+            if ($result != null) {
+                $return_value = $result;
             }
-            
-            else{
-                $return_value['status_code'] = -1;
-                $return_value['status_message'] = '最近沒有維修紀錄';
-                $return_value['sql'] = $sql;
+            return $return_value;
+
+        }
+        public function get_something_from_repair_type($something,$where){//從repair_type(戶)取
+            $sql ="SELECT ".$something." FROM `repair_type` WHERE $where";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchall();
+            if ($result != null) {
+                $return_value = $result;
             }
-            
-            return json_encode($return_value);
-        }        
+            return $return_value;
+
+        }
+        
     }
-
-//SELECT * FROM `case_profile` A JOIN `notice` B ON B.case_profile_id=A.id JOIN household_user C ON A.household_user_id=C.id JOIN user_profile D ON C.user_profile_id=D.id WHERE D.id=$user_id
-//SELECT * FROM `case_profile` A JOIN `repair_type` B ON A.repair_type_id=B.id
+    
 ?>
-

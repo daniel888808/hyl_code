@@ -30,7 +30,7 @@ class user_profile_show_update_page extends ActionHandler {
     </header>
     <!-- Default form contact -->
     <form class="mt-5">
-        <div class="container p-3 mt-5">
+        <div class="container p-3">
         
             <!-- Default input 名字 -->
             <i class="fa fa-user prefix grey-text text-center"></i>
@@ -51,7 +51,7 @@ class user_profile_show_update_page extends ActionHandler {
             <i class="fa fa-home prefix grey-text text-center"></i>
             <label for="exampleForm2">住址</label>
             <input type="text" id="address" class="form-control"readonly="readonly" value="`;
-                msg += ds[0]['address'];
+                msg += obj['address'];
                 msg += `">
             
             <!-- Default 電話 -->
@@ -79,6 +79,7 @@ class user_profile_show_update_page extends ActionHandler {
             <div class="text-center mt-2">
                 <button class="btn btn-outline-blue darken-4 waves-effect" type="button" onclick="(new user_profile_do_update_action('user_profile','do_update_action','body')).run()">修改</button>
             </div>
+            <div id="U_update_error"></div>
         </div>
     </form>
 `;

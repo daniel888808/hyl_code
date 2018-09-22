@@ -19,7 +19,7 @@
                 $return_value['user_id']=$_SESSION['user'];
             }
             else{
-                $return_value['status_code'] = -1;                
+                $return_value['status_code'] = -1; 
                 $return_value['sql'] = $sql;
             }
             return json_encode($return_value);

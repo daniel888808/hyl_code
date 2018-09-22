@@ -49,7 +49,7 @@ class notice_show_notice_page extends ActionHandler {
                                         </a>     
                                   </div>`;
 
-                        data = data.slice(5);
+                        data = data.slice(3);
                     }
                 }
                 console.log(data);

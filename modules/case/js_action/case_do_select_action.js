@@ -13,12 +13,12 @@ class case_do_select_action extends ActionHandler {
         // this.addArgs('where_statement', 'id = ' + value);
     }
     ajax_success(json_str) {
-
         try {
             var json_str = json_str.responseText;
             var obj = JSON.parse(json_str);
             if (obj['status_code'] === 0) {
                 var ds = obj['data_set'];
+                console.log(json_str);
                 var content = `
                <header>
                             <!-- Navbar -->
@@ -47,8 +47,13 @@ class case_do_select_action extends ActionHandler {
 						`;
                 content += "<div>日期:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['start_datetime'] + "'></div>";
                 content += "<div>維修內容:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['title'] + "'></div>";
-                content += "<div>工時:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['worktime'] + "'></div></br>";
-                content += "<div>維修狀態追蹤:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='" + ds[0]['status'] + "'></div>";
+                if (ds[0]['status'] == "finish") {
+                    content += "<div>維修狀態追蹤:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='完成'></div>";
+
+                }
+                else {
+                    content += "<div>維修狀態追蹤:<input type='text' class='form-control my-0' id='month1' placeholder='Enter month' readonly='readonly' value='未完成'></div>";
+                }
 
 
 
@@ -66,30 +71,22 @@ class case_do_select_action extends ActionHandler {
                             <span class="fa fa-star"></span>
                             <!--沒辦法就暫時用這個簡單版的 -->
                         </div>
-                            
                             `;
 
                 }
                 content += `
                     <a onclick="(new home_show_home_page('home','show_home_page','body','record')).run()"><button type="button" class="btn btn-primary mt-3">確定</button></a>
-                    
-                    
                     </form>
                     </div>
                     </div>
-               `;
+                           `;
 
                 $('#' + this.position_id).html(content);
-
             }
-
-
 
             else {
                 $('#' + this.position_id).html(obj['status_message']);
             }
-
-
         }
         catch (e) {
             var msg = e + "<br>";

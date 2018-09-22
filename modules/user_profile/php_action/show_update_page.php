@@ -10,18 +10,18 @@
         public function actionPerformed(event_message $em) {
             $post = $em->getPost();
             if(isset($_SESSION['useracc'])){
-			$user=$_SESSION['userid'];
+			$userid=$_SESSION['userid'];
 		    }
 		    $user_model = new user_profile_model();
 		    $building_model = new building_model();
 		    $household_model= new household_model();
-            $user_info = $user_model->get_user_info($user);
-            $household_id = $household_model->get_something_from_household_user("household_profile_id,address",$user);
-            $construction_project_id = $household_model->get_construction_project_from_household_profile($household_id[0][0]);
-            $construction_project_name = $building_model->get_user_construction_project($construction_project_id[0][0]);
+            $user_info = $user_model->get_something_from_user_profile("*","user_profile.id=".$userid);
+            $household_id = $household_model->get_something_from_household_user("household_profile_id","user_profile_id =".$userid);
+            $household_profile = $household_model->get_something_from_household_profile("construction_project_id,address","household_profile.id=".$household_id[0][0]);
+            $construction_project_name = $building_model->get_something_from_construction_project("name","construction_project.id=".$household_profile[0][0]);
             $return_value['data_set']=$user_info['data_set'];
             $return_value['construction_project']=$construction_project_name[0][0];
-            $return_value['address']=$construction_project_name[0][1];
+            $return_value['address']=$household_profile[0][1];
             if($user_info['data_set'] != null){
                 $return_value['status_code']=0;
                 $return_value['status_message']="OK";
@@ -29,8 +29,8 @@
                     $return_value['status_code']=1;
                     $return_value['status_message']="construction_project_error";
                     $return_value['household_id']=$household_id;
-                    $return_value['construction_project_id']=$construction_project_id[0][0];
-                    $return_value['construction_project_name']=$construction_project_name[0][0];
+                    $return_value['household_profile']=$household_profile;
+                    $return_value['construction_project_name']=$construction_project_name;
                 }
             }else{
                 $return_value['status_code']=2;

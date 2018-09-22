@@ -16,7 +16,69 @@ class home_show_home_page_E extends ActionHandler {
             if (obj['status_code'] === 1) {
                 (new news_do_select_action('news', 'do_select_action', 'news')).run();
                 var str = `
-                <header>
+                
+    <!-- Start your project here-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav sn-bg-4 fixed ">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <a href="#"><img src="http://www.huayulien.com/wp-content/uploads/2015/04/H-logo-e1429491876768.png" class="img-fluid flex-center"></a>
+                    </div>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+                <li>
+                    <ul class="social">
+                        <li><a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+                        <li><a href="#" class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
+                        <li><a href="#" class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+                        <li><a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+                    </ul>
+                </li>
+                <!--/Social-->
+                <!--Search Form-->
+                <li>
+                    <form class="search-form" role="search">
+                        <div class="form-group md-form mt-0 pt-1 waves-light">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </li>
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> 首頁<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul class="list-unstyled">
+                                    <li><a href="submit.html" class="waves-effect"><i class="fa fa-hand-pointer-o"></i>我要報修</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect"><i class="fa fa-eye"></i>維修狀態追蹤</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope-o"></i> 客服中心<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul class="list-unstyled">
+                                    <li><a href="#" class="waves-effect">FAQ</a>
+                                    </li>
+                                    <li><a href="#" class="waves-effect">Write a message</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
         <!-- Navbar -->
         <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg double-nav">
             <!-- SideNav slide-out button -->
@@ -192,18 +254,22 @@ class home_show_home_page_E extends ActionHandler {
             </div>
         </div>
 
-    <!-- /.通知 -->
+        <!-- /.通知 -->
         <div class="tab-pane fade" id="notice" role="tabpanel">
-            <div class="my-0 py-0 pt-3">
-                <select class="mdb-select">
-                        <option value="" disabled selected>全部顯示</option>
-                        <option value="1">全部顯示</option>
-                        <option value="2">完成通知</option>
-                        <option value="3">時間通知</option>
-                    </select>
+            <div class="list-group font-weight-bold h2 pt-3">
+
+                <a href="case.html" class="list-group-item list-group-item-success">豐花園 水電類 3-9 水管破裂 2018/03/01</a>
+                <a href="case.html" class="list-group-item list-group-item-warning">七期 電機類 5-3 冷氣無法正常開啟 2018/02/21</a>
+
+                <a href="case.html" class="list-group-item list-group-item-success">水岸 水電類 3-6 水管破裂 2018/01/10</a>
+                <a href="case.html" class="list-group-item list-group-item-success">水岸 水電類 2-9 水管破裂 2017/12/22</a>
+                <a href="case.html" class="list-group-item list-group-item-warning">豐花園 電機類 3-9 電梯無法正常使用 2017/11/31</a>
+                <a href="case.html" class="list-group-item list-group-item-success">豐花園 水電類 3-2 水管破裂 2017/10/12</a>
+                <a href="case.html" class="list-group-item list-group-item-warning">七期 電機類 5-9 地下室鐵捲門異音 2017/10/12</a>
+                <a href="case.html" class="list-group-item list-group-item-success">豐花園 水電類 7-4 水管破裂 2017/09/01</a>
             </div>
         </div>
-        
+
         <!-- /首頁. -->
         <div class="tab-pane fade in show active" id="fix" role="tabpanel">
             <div class="container pt-3">
@@ -478,8 +544,8 @@ class home_show_home_page_E extends ActionHandler {
                         <a href="#search" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-search  white-text fa-2x" aria-hidden="true"> </i>
                         </br>搜尋</a>
                     </li>
-                <li class="nav-item maxWidth" onclick="(new notice_show_notice_page_E('notice','show_notice_page ','notice')).run()"> 
-                        <a href="#notice" id="noticeb" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-bell white-text fa-2x" aria-hidden="true"></i>
+                    <li class="nav-item maxWith">
+                        <a href="#notice" class="nav-link waves-light" data-toggle="tab" role="tab"><i class="fa fa-bell white-text fa-2x" aria-hidden="true"></i>
                         <span class="counter">2</span>
                         </br>通知</a>
                     </li>
@@ -521,7 +587,9 @@ class home_show_home_page_E extends ActionHandler {
         $(document).ready(function() {
             $('.mdb-select').material_select();
         });
-    </script>`;
+    </script>
+
+`;
 
                 document.getElementById(this.position_id).innerHTML = str;
 

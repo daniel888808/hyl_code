@@ -1,9 +1,15 @@
 <?php
     require_once 'include/php/action_listener.php';
     require_once 'include/php/event_message.php';
+    require_once 'modules/user_profile/php_action/user_profile_model.php';
     
     class do_select_action implements action_listener{
         public function actionPerformed(event_message $em) {
+//             if(isset($_SESSION['useracc'])){
+// 			$userid=$_SESSION['userid'];
+// 		    }
+// 		    $user_model = new user_profile_model();
+// 		    $user_info = $user_model->get_something_from_user_profile("*","user_profile.id=".$userid);
             $conn = PDO_mysql::getConnection();
             $sql = "SELECT * FROM user_profile";
             $post = $em->getPost();

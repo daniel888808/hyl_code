@@ -10,55 +10,10 @@ class repair_show_repair_page extends ActionHandler {
         this.php_action = 'do_select_action';
     }
     ajax_success(json_str) {
-        console.log(this.repair_id);
-        // switch (this.repair_type) {
-        //     case 'Hydropowerrepair':
-        //         alert('Hydropowerrepair');
-        //         var a = 'Hydropowerrepair';
-        //         var k = '水電報修';
-        //         break;
-        //     case 'ElectricalEngineering':
-        //         alert('ElectricalEngineering');
-        //         var a = 'ElectricalEngineering';
-        //         var k = '電機相關';
-        //         break;
-        //     case 'Installationwork':
-        //         alert('Installationwork');
-        //         var a = 'Installationwork';
-        //         var k = '安裝工程';
-        //         break;
-        //     case 'Publicmaintenance':
-        //         alert('Publicmaintenance');
-        //         var a = 'Publicmaintenance';
-        //         var k = '公設維修';
-        //         break;
-        //     case 'Furnituremaintenance':
-        //         alert('Furnituremaintenance');
-        //         var a = 'Furnituremaintenance';
-        //         var k = '家具維修';
-        //         break;
-        //     case 'CleaningServices':
-        //         alert('CleaningServices');
-        //         var a = 'CleaningServices';
-        //         var k = '清潔服務';
-        //         break;
-        //     case 'Paintingworks':
-        //         alert('Paintingworks');
-        //         var a = 'Paintingworks';
-        //         var k = '油漆工程';
-        //         break;
-        //     case 'Other':
-        //         alert('Other');
-        //         var a = 'Other';
-        //         var k = '其他維修';
-        //         break;
-        //     default:
-        //         alert('choice one!!');
-        // }
+
         $(document).ready(function() {
             $("select").on("change", function() {
                 var s = $("select[name='select1']").val();
-                //alert(s);
                 var r = s;
                 console.log(r);
             });
@@ -101,8 +56,7 @@ class repair_show_repair_page extends ActionHandler {
             // alert(obj['status_code']);
             if (obj['status_code'] === 0) {
                 var ds = obj['data_set'];
-                var str = `
-                            <header>
+                var str = `<header>
                             <!-- Navbar -->
                             <nav class="navbar bgdark text-white">
                                 <div onclick="(new home_show_home_page('home','show_home_page','body')).run()">
@@ -133,10 +87,10 @@ class repair_show_repair_page extends ActionHandler {
                 str += `</div></div>
                         <div class="row my-0" id="showBlock">
                                                 <label for="time" class="font-weight-bold col-12">請輸入您方便的時間<a type="button" id="btn" value="addItem"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
-                                                <div class="col-4">
+                                                <div class="col-4" id="month">
                                                     <input type="date" class="form-control" id="month1" placeholder="Enter month">
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-4" >
                                                     <input placeholder="起始時間" type="text" id="input_starttime1-1" class="form-control timepicker">
                                                 </div>
                                                 <div class="col-4">
@@ -145,11 +99,11 @@ class repair_show_repair_page extends ActionHandler {
                                         </div>
                                         
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-4" >
                                                 <label class="font-weight-bold ">待修狀況:</label>
                                             </div>
-                                            <div class="col-8">
-                                                <input type="text" name="" length="30" style="border:1px solid #ced4da;border-radius:2px"/>
+                                            <div class="col-8" >
+                                                <input type="text" id="case_title" name="" length="30" style="border:1px solid #ced4da;border-radius:2px"/>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -157,7 +111,7 @@ class repair_show_repair_page extends ActionHandler {
                         
                                             <div class="md-form mt-1 mb-3">
                                                 <i class="fa fa-pencil prefix grey-text mt-2"></i>
-                                                <textarea type="text" id="materialFormContactMessageEx" class="form-control md-textarea ml-4" rows="4"></textarea>
+                                                <textarea type="text" id="case_content" class="form-control md-textarea ml-4" rows="4"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">

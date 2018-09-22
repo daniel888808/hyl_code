@@ -482,6 +482,8 @@ jquery引用失敗
 JWT
 一般user的畫面不會有公設按鈕
 
+note 有用sess userprofile do_upaate，show_update_page //case_do_reapir_action.php
+
 <!-----------this week(9/10)-------------!>
 通知
 02
@@ -493,6 +495,7 @@ JWT
 圖片
 jwt
 (名稱用大寫E結尾)
+若客戶有兩棟房子
 
 主任 home login 23
      case(新案件畫面list)  05
@@ -500,6 +503,10 @@ jwt
      case(搜尋)
      notice37
 
-     
+1.現在三個平台放一起 之後再分開嗎(客戶APP、主任APP、後台)?分開 model共用
+2.如果有主任同時是住戶的情況，或是一帳戶兩棟房子
+3.主畫面的新通知數量
+4.工時(單位)
+
 
 

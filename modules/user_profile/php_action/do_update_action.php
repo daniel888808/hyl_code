@@ -10,27 +10,23 @@
             $name = $post['name'];
             $cp = $post['cp'];
             $address = $post['address'];
-            $id = $post['phonenum'];
+            $phonenum = $post['phonenum'];
             $acc= $post['email'];
             $password = $post['password'];
             if(isset($_SESSION['useracc'])){
-			$user=$_SESSION['userid'];
+			    $userid=$_SESSION['userid'];
 		    }
             $user_model = new user_profile_model();
-            $user_model->update_user_info($name,$id,$acc,$password,$user);
-            // $conn = PDO_mysql::getConnection();
-            // $sql = "UPDATE user_profile SET acc=:acc, name=:name, email=:email, pw=:pw, tel=:tel, addr=:addr WHERE id=:id";
-            // $stmt = $conn->prepare($sql);
-            // $result = $stmt->execute(array(':name'=>$name, ':email'=>$email, ':pw'=>$password, ':tel'=>$tel ,':id'=>$id));
-            if($result) {
-                $msg = '更新成功';
-                $return_value['status_code']=0;
+            $email=$user_model->get_something_from_user_profile("account","user_profile.id !=".$userid." AND user_profile.account='".$acc."'");
+            if($email == null){
+                $return_value['status_code'] = 10;
+                $return_value['test'] = $acc;
+                $return_value['test1'] = $email;
+                $user_model->update_user_info($name,$phonenum,$acc,$password,$userid);
+            }else{
+                $return_value['status_code'] = 20;//有其他同名帳號
             }
-            else{
-                $msg = "更新失敗";
-                $return_value['status_code']=2;
-            }
-            return $return_value;
+            return json_encode($return_value);
         }
     }
     

@@ -23,7 +23,7 @@ class home_show_home_page extends ActionHandler {
             this.loadModuleScript("login", "do_logout_action");
             this.loadModuleScript("case", "show_select_page");
 
-            
+
 
             if (obj['status_code'] === 1) {
                 (new news_do_select_action('news', 'do_select_action', 'news')).run();
@@ -173,6 +173,11 @@ class home_show_home_page extends ActionHandler {
             else if (obj['status_code'] == 2) {
                 (new login_show_login_page("login", "show_login_page", "body")).run();
                 var script = this.loadModuleScript("login", "show_login_page");
+            }
+            else if (obj['status_code'] == 5) {
+                console.log("dd");
+                (new home_show_home_page_E('home', 'show_home_page_E', 'body')).run();
+                var script = this.loadModuleScript("home", "show_home_page_E");
             }
             else {
                 console.log("Invalid status code " + obj['status_code']);
