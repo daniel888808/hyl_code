@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -64,19 +68,36 @@
         $('#input_starttime1-2').pickatime({});
         $('#input_starttime2-1').pickatime({});
         $('#input_starttime2-2').pickatime({});
+        $('#input_starttime3-1').pickatime({});
+        $('#input_starttime3-2').pickatime({});
         //});
 
         //set the default value
-        var txtId = 1;
+        var txtId = 2;
+        var txtna = 1;
         //add input block in showBlock
-        $("#btn").click(function() {
-            $("#showBlock").append('<div id="div' + txtId + '"><div class="col-4" "><input type="date" class="form-control" name="test[]" id="month1" placeholder="Enter month" /></div><div class="col-4"><input type="text" class="form-control timepicker" name="test[]" id="input_starttime1-1" placeholder="起始時間"/></div><div class="col-4"><input type="text" class="form-control timepicker" name="test[]" id="input_starttime1-2" placeholder="結束時間"/></div><input type="button" value="del" onclick="deltxt(' + txtId + ')"></div>');
-            txtId++;
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+        //del only can use in index
+        //but add can use in js for now
+
+
+
         //remove div
-        function deltxt(id) {
-            $("#div" + id).remove();
-        }
+        //function deltxt(id) {
+        //    $("#div" + id).remove();
+        //    alert("it is in index");
+        //}
     </script>
 </body>
 

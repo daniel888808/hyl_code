@@ -13,7 +13,7 @@ class case_show_select_page extends ActionHandler {
     ajax_success(xhttp) {
         try {
             var json_str = xhttp.responseText;
-            console.log(json_str);
+
             var obj = JSON.parse(json_str);
             if (obj['status_code'] === 0) {
                 var ds = obj['data_set'];
@@ -35,17 +35,14 @@ class case_show_select_page extends ActionHandler {
                     </thead>
                     <tshow_area>
                         `;
-
                 for (var i in ds) {
-
                     t1 = st(ds[i]['start_datetime']);
                     content += `
                     <tr>
-                            <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">${t1} </a></td>
-                            <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">${ds[i]['title']} </a></td>
-                            <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()"><i class = "fa fa-check light-blue-text" aria-hidden="true"></a></i></td>
-                        </tr>
-
+                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">${t1} </a></td>
+                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">${ds[i]['title']} </a></td>
+                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()"><i class = "fa fa-check light-blue-text" aria-hidden="true"></a></i></td>
+                    </tr>
                                 `;
                 }
                 content += `                

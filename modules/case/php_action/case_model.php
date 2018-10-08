@@ -9,7 +9,7 @@
             parent::__construct();
         }
         public function insert_new_case($household_user_id,$repair_type_id,$title, $content,$start_datetime){
-            $sql ="INSERT INTO `case_profile` (`id`, `status`, `household_user_id`, `repair_type_id`, `title`, `content`, `user_rank`, `user_conmment`, `start_datetime`, `end_datetime`) VALUES (NULL, 'unfinish', '$household_user_id', '$repair_type_id', '$title', '$content', NULL, NULL, '$start_datetime', NULL)";
+            $sql ="INSERT INTO `case_profile` (`id`, `status`, `household_user_id`, `repair_type_id`, `title`, `content`, `user_rank`, `user_conmment`, `start_datetime`, `end_datetime`) VALUES (NULL, 'new', '$household_user_id', '$repair_type_id', '$title', '$content', NULL, NULL, '$start_datetime', NULL)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
         }
@@ -57,7 +57,17 @@
             return $return_value;
 
         }
-        
+       
+        public function update_case_profile($something,$where){
+            $sql ="UPDATE `case_profile` SET $something WHERE $where";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+        }
+        public function update_repair_type($something,$where){
+            $sql ="UPDATE `repair_type` SET $something WHERE $where";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+        }
     }
     
 ?>

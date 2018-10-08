@@ -11,12 +11,10 @@
             $case_model = new case_model();
             $household_model= new household_model();
             $household_id = $household_model->get_something_from_household_user("id","user_profile_id =".$user_id);
-            $allcase = $case_model->get_something_from_case_profile("*","household_user_id=".$household_id[0][0]);
+            $allcase = $case_model->get_something_from_case_profile("*","household_user_id=".$household_id[0][0]." ORDER BY `start_datetime` DESC");
             // $conn = PDO_mysql::getConnection();
             // $sql = "SELECT * FROM `case_profile` A WHERE A.household_user_id=$user_id";
-            // $post = $em->getPost();
-            // $stmt = $conn->prepare($sql);
-            // $result = $stmt->execute();
+            
             if($allcase){
                 $ds = $allcase;
                 $return_value['status_code'] = 0;

@@ -15,7 +15,6 @@ class home_show_home_page extends ActionHandler {
 
             this.loadModuleScript("news", "do_select_action");
             this.loadModuleScript("repair", "show_repair_page");
-            this.loadModuleScript("notice", "show_time_confirmation_page");
             this.loadModuleScript("notice", "show_select_page");
             this.loadModuleScript("notice", "show_notice_page");
             this.loadModuleScript("user_profile", "show_update_page");
