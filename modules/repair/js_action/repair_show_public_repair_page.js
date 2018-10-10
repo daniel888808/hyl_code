@@ -1,9 +1,8 @@
-class repair_show_repair_page extends ActionHandler {
-    constructor(module, action, position_id, repair_type, repair_id) {
+class repair_show_public_repair_page extends ActionHandler {
+    constructor(module, action, position_id) {
         super(module, action);
         this.position_id = position_id;
-        this.repair_type = repair_type;
-        this.repair_id = repair_id;
+
     }
     prepareArgs() {
         this.php = true;
@@ -69,29 +68,14 @@ class repair_show_repair_page extends ActionHandler {
                     $("#preview_progressbarTW_imgs").append(noPictures);
                 }
             }
-            //add input block in showBlock
-            function deltxt(id) {
-                var di = "div" + id;
-                $(di).detach();
-                txtna = txtna - 1;
-                console.log(txtna);
-            }
+
         });
         try {
             var json_str = json_str.responseText;
             var obj = JSON.parse(json_str);
-            // alert(obj['status_code']);
             if (obj['status_code'] === 0) {
-
                 var ds = obj['data_set'];
-
-                var r = this.repair_type;
-                if (r == 4) {
-                    var str = `<div id ="pf1">pf1</div>`;
-                }
-                else {
-
-                    var str = `<header>
+                var str = `<header>
                             <!-- Navbar -->
                             <nav class="navbar bgdark text-white">
                                 <div onclick="(new home_show_home_page('home','show_home_page','body')).run()">
@@ -109,18 +93,8 @@ class repair_show_repair_page extends ActionHandler {
                                                 <label class="font-weight-bold">維修類型:</label>
                                             </div>
                                             <div class="col-8 form-group">`;
-                    str += '<select class="mdb-select" name="select1">';
-                    for (var index in ds) {
-                        if (ds[index]['name'] == this.repair_type) {
-                            str += '<option value="' + ds[index]['id'] + '"  selected>' + ds[index]['namech'] + '</option>';
-
-                        }
-                        else {
-                            str += '<option value="' + ds[index]['id'] + '">' + ds[index]['namech'] + '</option>';
-                        }
-                    }
-                    str += '</select>';
-                    str += `</div></div>
+                str += '<select class="mdb-select" name="select1"><option value="4"  selected>公設維修</option></select>';
+                str += `</div></div>
                         <div class="row mt-0 mb-3 pb-0" id="showBlock">
                             <label for="time" class="font-weight-bold col-12">請輸入您方便的時間<a type="button" id="addbtn" value="addItem"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
                             <div class="col-4">
@@ -158,9 +132,9 @@ class repair_show_repair_page extends ActionHandler {
                                                </div>
                                             </div>
                                         </div>
-                                        <button type="button" id="doreapir" class="btn btn-primary rounded" click="checktime()">提交</button>
-                                        <button type="button" id="testbutton" class="btn btn-primary rounded" click="">動作測試用</button>
-                                        
+                                       <button type="button"  class="btn btn-primary rounded" onclick="(new repair_do_repair_action('repair','do_repair_action','body')).run()">提交</button>
+                                        <button type="button" id="testtime"  class="btn btn-primary rounded" click="checktime()">測試</button>
+                                       
                                                                                   <!--(new repair_do_repair_action('repair','do_repair_action','body')).run()-->
                                     </form>
                                 </div>
@@ -188,7 +162,7 @@ class repair_show_repair_page extends ActionHandler {
                                 
                             </script>
                                 `;
-                }
+
 
                 $(document).ready(function() {
                     //remove div
@@ -265,9 +239,7 @@ class repair_show_repair_page extends ActionHandler {
                         return ttime;
                     }
 
-
-
-                    $("#dorepair").click(function checktime() {
+                    $("#testtime").click(function checktime() {
 
                         var t1 = gt();
                         var x1 = document.getElementById("div2");
@@ -299,7 +271,7 @@ class repair_show_repair_page extends ActionHandler {
                                     else {
                                         document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
                                         //do repair action;
-                                        (new repair_do_repair_action('repair', 'do_repair_action', 'body')).run();
+                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
                                     }
                                 }
                             }
@@ -333,7 +305,7 @@ class repair_show_repair_page extends ActionHandler {
                                     else {
                                         document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
                                         //do repair action;
-                                        (new repair_do_repair_action('repair', 'do_repair_action', 'body')).run();
+                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
                                     }
 
                                 }
@@ -368,7 +340,7 @@ class repair_show_repair_page extends ActionHandler {
                                     else {
                                         document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
                                         //do repair action;
-                                        (new repair_do_repair_action('repair', 'do_repair_action', 'body')).run();
+                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
                                     }
                                 }
                             }
@@ -404,7 +376,7 @@ class repair_show_repair_page extends ActionHandler {
                                     else {
                                         document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
                                         //do repair action;
-                                        (new repair_do_repair_action('repair', 'do_repair_action', 'body')).run();
+                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
                                     }
                                 }
                             }

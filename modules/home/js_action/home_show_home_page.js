@@ -15,6 +15,7 @@ class home_show_home_page extends ActionHandler {
 
             this.loadModuleScript("news", "do_select_action");
             this.loadModuleScript("repair", "show_repair_page");
+            this.loadModuleScript("repair", "show_public_repair_page");
             this.loadModuleScript("notice", "show_select_page");
             this.loadModuleScript("notice", "show_notice_page");
             this.loadModuleScript("user_profile", "show_update_page");
@@ -66,7 +67,7 @@ class home_show_home_page extends ActionHandler {
                     <button type="button"  class="btn btn-indigo m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Installationwork','3')).run()"><i class="fa fa-wrench" aria-hidden="true" ></i></br>安裝<br>工程</button>
                 </div>
                 <div class="mt-1">
-                    <button type="button"  class="btn btn-teal darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Publicmaintenance','4')).run()"><i class="fa fa-building" aria-hidden="true" ></i></br>公設<br>維修</button>
+                    <button type="button"  class="btn btn-teal darken-3 m-0 w-32" onclick="(new repair_show_public_repair_page('repair','show_public_repair_page','body')).run()"><i class="fa fa-building" aria-hidden="true" ></i></br>公設<br>維修</button>
                     <button type="button"  class="btn btn-red m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Furnituremaintenance','5')).run()"><i class="fa fa-bed" aria-hidden="true" ></i></br>家具<br>維修</button> 
                     <button type="button"  class="btn btn-deep-purple darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','CleaningServices','6')).run()"><i class="fa fa-bug" aria-hidden="true" ></i></br>清潔<br>服務</button>
                 </div>

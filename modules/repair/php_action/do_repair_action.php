@@ -34,7 +34,8 @@
 		    $case_model->insert_new_case($household_user_id[0][0],$repair_type_id,$case_title, $case_content,$date);//insert_new_case($household_user_id,$repair_type_id,$title, $content,$start_datetime)
 			$case_id=$case_model->get_case_id($household_user_id[0][0],$date);
 			$repair_model->insert_new_repair_history($case_id);
-			$repair_history_id=$repair_model->get_something_from_repair_history("id","case_id=".$case_id);
+			//$repair_history_id=$repair_model->get_something_from_repair_history("id","case_id=".$case_id);
+			$repair_history_id=$repair_model->get_last_repair_history_id($case_id);
 			$repair_model->insert_new_applydate($repair_history_id[0][0],$month1,$input_starttime1_1,$input_starttime1_2);
 			if($input_starttime2_1 != null && $input_starttime2_2 != null){
 				$repair_model->insert_new_applydate($repair_history_id[0][0],$month2,$input_starttime2_1,$input_starttime2_2);

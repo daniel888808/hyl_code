@@ -25,28 +25,32 @@ class case_show_select_page extends ActionHandler {
     <div class="container">
         <div class="row " id="min-h">
             <div class="col-12 px-0">
-                <table class="table table-striped text-center mt-3">
+                <table class="table table-striped text-center mt-3 " id="touchtable">
                     <thead>
                         <tr>
-                            <th scope="col-4" class="py-1 font-weight-bold h6">報修日期 </th>
-                            <th scope="col-4" class="py-1 font-weight-bold h6">維修事項</th>
-                            <th scope="col-4" class="py-1 font-weight-bold h6" style="width:120px">維修狀況</th>
+                            <th scope="col-4" class="py-1 font-weight-bold h6" width="30%">報修日期 </th>
+                            <th scope="col-4" class="py-1 font-weight-bold h6" width="50%">維修事項</th>
+                            <th scope="col-4" class="py-1 font-weight-bold h6" width="20%"">狀況</th>
                         </tr>
                     </thead>
-                    <tshow_area>
+                    <tbody>
                         `;
                 for (var i in ds) {
-                    t1 = st(ds[i]['start_datetime']);
+                    //t1 = st(ds[i]['start_datetime']);
                     content += `
-                    <tr>
-                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">${t1} </a></td>
+                    <tr data-case_id="${ds[i]["id"]}">
+                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">` + st_time_to_date(ds[i]['start_datetime']) + ` </a></td>
                         <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">${ds[i]['title']} </a></td>
-                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()"><i class = "fa fa-check light-blue-text" aria-hidden="true"></a></i></td>
+                        <td class="py-1 fontsm"><a onclick="(new case_do_select_action('case','do_select_action','body','${ds[i]["id"]}')).run()">`;
+                    if (ds[i]["status"] == "finish") {
+                        content += '<i class = "fa fa-check light-blue-text" aria-hidden="true"></i>';
+                    }
+                    content += `</a></td>
                     </tr>
-                                `;
+                                `; //<i class = "fa fa-check light-blue-text" aria-hidden="true"></i>
                 }
                 content += `                
-                    </tshow_area>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -62,6 +66,20 @@ class case_show_select_page extends ActionHandler {
                     return tt3;
                 };
 
+                function st_time_to_date(tt1) {
+                    var tt3;
+                    tt3 = tt1.split(" ")[0].split("-")[0] + "/" + tt1.split(" ")[0].split("-")[1] + "/" + tt1.split(" ")[0].split("-")[2];
+                    return tt3;
+                };
+                $(document).ready(function() {
+                    $('#touchtable tbody tr').click(
+                        function() {
+                            console.log("aa");
+                            var tcase_id = $(this).data('case_id');
+                            (new case_do_select_action('case', 'do_select_action', 'body', tcase_id)).run()
+
+                        });
+                });
                 $('#' + this.position_id).html(content);
 
             }

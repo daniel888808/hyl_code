@@ -20,13 +20,13 @@
                 $return_value['status_code'] = 0;
                 $return_value['status_message'] = 'Execute Success';
                 $return_value['data_set'] = $ds;
-                $return_value['sql'] = $sql;
+                //$return_value['sql'] = $sql;
             }
             
             else{
                 $return_value['status_code'] = -1;
                 $return_value['status_message'] = '最近沒有維修紀錄';
-                $return_value['sql'] = $sql;
+                //$return_value['sql'] = $sql;
                 $return_value['$household_id']= $household_id;
             }
             

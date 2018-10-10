@@ -19,13 +19,22 @@
             $case = $case_model->get_something_from_case_profile("*","case_profile.id=".$cid);
             $repair_history_id=$repair_model->get_last_repair_history_id($cid);
             //最後一筆維修歷程
+            $repair_date=$repair_model->get_something_from_repair_history("reservetime","id=".$repair_history_id[0][0]);
             $apply_date=$repair_model->get_something_from_applydate("start_Time,end_Time","repair_history_id=".$repair_history_id[0][0]);
+            
             if($apply_date!= null){
                             $return_value['check_apply']="yes";
                         }else{
                             $return_value['check_apply']="no";
                         }
             //檢查維修歷程中客戶有沒有給預約時間
+            if($repair_date[0][0] != null){
+                            $return_value['check_repair_date']="yes";
+                            $return_value['repair_date']=$repair_date;
+                        }else{
+                            $return_value['check_repair_date']="no";
+                        }
+        
             if($case){
                 $return_value['status_code'] = 0;
                 $return_value['status_message'] = 'Execute Success';
