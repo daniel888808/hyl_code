@@ -5,6 +5,7 @@
 	require_once 'modules/case/php_action/case_model.php';
 	require_once 'modules/household/php_action/household_model.php';
 	require_once 'modules/repair/php_action/repair_model.php';
+	require_once 'modules/public_facilities/php_action/public_facilities_model.php';
 	class do_repair_action implements action_listener{
 		public function actionPerformed(event_message $em)
 		{
@@ -15,22 +16,44 @@
             $input_starttime2_2 = $post['input_starttime2-2'];
             $input_starttime3_1 = $post['input_starttime3-1'];
             $input_starttime3_2 = $post['input_starttime3-2'];
+            
             $month1 = $post['date1'];
             $month2 = $post['date2'];
             $month3 = $post['date3'];
             $case_content = $post['case_content'];
             $case_title=$post['case_title'];
-            $repair_type_id=$post['class'];
+            $case_location=$post['location'];
+            $repair_type_id=4;
             if(isset($_SESSION['useracc'])){
 			    $userid=$_SESSION['userid'];
 		    }
 		    $repair_model=new repair_model();
 		    $case_model= new case_model();
 		    $household_model= new household_model();
+		    $public_facilities_model=new public_facilities_model();
 		    ini_set ( 'date.timezone' , 'Asia/Taipei' );
 			date_default_timezone_set('Asia/Taipei');
 		    $date=date("Y-m-d")." ".date("H:i:s");
+		    //new public
+		    //new householduser
+		    //new case
+		    
+		    
+		    
+		    
 		    $household_user_id = $household_model->get_something_from_household_user("household_profile_id","user_profile_id =".$userid);
+		    
+		    $construction_project_id=$household_model->get_something_from_household_profile("construction_project_id","household_profile_id=".$household_user_id[0][0]);
+		    
+		    //$construction_project_id,$location
+		    $public_facilities_model->insert_new_public_facilities($construction_project_id[0][0],$case_location);
+		    //get public id
+		    $public_facilities_id=$household_model->get_something_from_public_facilities("id","construction_project_id=".$construction_project_id[0][0]." ORDER BY id DESC");
+		    
+		    //$user_profile_id,$household_profile_id,$public_facilities_id
+		    $household_model->insert_public_household_user($userid,$household_user_id[0][0],$public_facilities_id[0][0]);
+		    
+		    
 		    $case_model->insert_new_case($household_user_id[0][0],$repair_type_id,$case_title, $case_content,$date);//insert_new_case($household_user_id,$repair_type_id,$title, $content,$start_datetime)
 			$case_id=$case_model->get_case_id($household_user_id[0][0],$date);
 			$repair_model->insert_new_repair_history($case_id);

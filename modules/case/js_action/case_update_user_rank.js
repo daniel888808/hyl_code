@@ -19,13 +19,14 @@ class case_update_user_rank extends ActionHandler {
             if (obj['status_code'] == 0) {
                 var ds = obj['repair_company'];
                 console.log(obj);
-                //this.loadModuleScript("home", "show_home_page_E");
                 var content = "";
                 content += `
                 
                 `;
+                this.loadModuleScript("home", "show_home_page");
                 this.loadModuleScript("case", "do_select_action");
-                (new case_do_select_action('case', 'do_select_action', 'body', this.case_id)).run();
+                (new home_show_home_page('home', 'show_home_page', 'body', 'record')).run();
+                //(new case_do_select_action('case', 'do_select_action', 'body', this.case_id)).run();
                 //$('#' + this.position_id).html(content);
 
             }

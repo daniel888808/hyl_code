@@ -27,7 +27,8 @@ class home_show_home_page extends ActionHandler {
 
             if (obj['status_code'] === 1) {
                 (new news_do_select_action('news', 'do_select_action', 'news')).run();
-
+                var type = obj['pf'][0]["type"];
+                console.log(type);
 
 
                 var str = `
@@ -142,7 +143,14 @@ class home_show_home_page extends ActionHandler {
 
 
 
+                $(#pfbtn).click(function checktype() {
+                    if (pf == "pf_user") {
 
+                    }
+                    else {}
+
+
+                });
                 switch (this.blank) {
                     case 'home':
                         {

@@ -230,7 +230,6 @@ class case_do_select_action extends ActionHandler {
                                     else {
                                         (new case_update_user_rank('case', 'update_user_rank', 'show_reply_err', $("#case_id").data("value"))).run();
                                     }
-
                                 }
                                 else {
                                     (new home_show_home_page('home', 'show_home_page', 'body', 'record')).run();

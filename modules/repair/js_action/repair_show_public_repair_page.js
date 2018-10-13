@@ -111,6 +111,12 @@ class repair_show_public_repair_page extends ActionHandler {
                     <div id="time_err"></div>
                     <div class="row">
                         <div class="col-4" >
+                            <label class="font-weight-bold ">待修位置:</label>
+                        </div>
+                        <div class="col-8" >
+                            <input type="text" id="case_location" name="" length="30" style="border:1px solid #ced4da;border-radius:2px"/>
+                        </div>
+                        <div class="col-4" >
                             <label class="font-weight-bold ">待修狀況:</label>
                         </div>
                         <div class="col-8" >
@@ -132,8 +138,8 @@ class repair_show_public_repair_page extends ActionHandler {
                                                </div>
                                             </div>
                                         </div>
-                                       <button type="button"  class="btn btn-primary rounded" onclick="(new repair_do_repair_action('repair','do_repair_action','body')).run()">提交</button>
-                                        <button type="button" id="testtime"  class="btn btn-primary rounded" click="checktime()">測試</button>
+                                       <button type="button" id="dorepair" class="btn btn-primary rounded" click="checktime()">提交</button>
+
                                        
                                                                                   <!--(new repair_do_repair_action('repair','do_repair_action','body')).run()-->
                                     </form>
@@ -239,7 +245,7 @@ class repair_show_public_repair_page extends ActionHandler {
                         return ttime;
                     }
 
-                    $("#testtime").click(function checktime() {
+                    $("#dorepair").click(function checktime() {
 
                         var t1 = gt();
                         var x1 = document.getElementById("div2");
@@ -250,32 +256,38 @@ class repair_show_public_repair_page extends ActionHandler {
                             var time1 = document.getElementById("input_starttime1-1").value;
                             var time2 = document.getElementById("input_starttime1-2").value;
                             var date1 = document.getElementById("date1").value;
+                            var title = document.getElementById("case_title").value;
+                            var content = document.getElementById("case_content").value;
 
-                            if (date1 == false) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
-                            }
-                            else if (date1 < t1) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
+                            if (title == "" || content == "") {
+                                document.getElementById("time_err").innerHTML = `<p class="red-text">尚未填寫狀況</p>`;
                             }
                             else {
-                                if (time1 == null || time2 == null) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                if (date1 == false) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
                                 }
-                                else if (time1 == time2) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
+                                else if (date1 < t1) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
                                 }
                                 else {
-                                    if (time1 > time2) {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                    if (time1 == null || time2 == null) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                    }
+                                    else if (time1 == time2) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
                                     }
                                     else {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
-                                        //do repair action;
-                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
+                                        if (time1 > time2) {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                        }
+                                        else {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
+                                            //do repair action;
+                                            (new repair_do_public_repair_action('repair', 'do_public_repair_action', 'body')).run();
+                                        }
                                     }
                                 }
                             }
-
                         }
                         else if (x1 && x2 == null) {
                             var time1 = document.getElementById("input_starttime1-1").value;
@@ -284,33 +296,37 @@ class repair_show_public_repair_page extends ActionHandler {
                             var time4 = document.getElementById("input_starttime2-2").value;
                             var date1 = document.getElementById("date1").value;
                             var date2 = document.getElementById("date2").value;
-
-                            if (date1 == false || date2 == false) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
-                            }
-                            else if (date1 < t1 || date2 < t1) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
+                            var title = document.getElementById("case_title").value;
+                            var content = document.getElementById("case_content").value;
+                            if (title == "" || content == "") {
+                                document.getElementById("time_err").innerHTML = `<p class="red-text">尚未填寫狀況</p>`;
                             }
                             else {
-                                if (time1 == null || time2 == null || time3 == null || time4 == null) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                if (date1 == false || date2 == false) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
                                 }
-                                else if (time1 == time2 || time3 == time4) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
+                                else if (date1 < t1 || date2 < t1) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
                                 }
                                 else {
-                                    if (time1 > time2 || time3 > time4) {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                    if (time1 == null || time2 == null || time3 == null || time4 == null) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                    }
+                                    else if (time1 == time2 || time3 == time4) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
                                     }
                                     else {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
-                                        //do repair action;
-                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
+                                        if (time1 > time2 || time3 > time4) {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                        }
+                                        else {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
+                                            //do repair action;
+                                            (new repair_do_public_repair_action('repair', 'do_public_repair_action', 'body')).run();
+                                        }
                                     }
-
                                 }
                             }
-
                         }
                         else if (x1 == null && x2) {
                             var time1 = document.getElementById("input_starttime1-1").value;
@@ -319,28 +335,34 @@ class repair_show_public_repair_page extends ActionHandler {
                             var time4 = document.getElementById("input_starttime3-2").value;
                             var date1 = document.getElementById("date1").value;
                             var date2 = document.getElementById("date3").value;
-
-                            if (date1 == false || date2 == false) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
-                            }
-                            else if (date1 < t1 || date2 < t1) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
+                            var title = document.getElementById("case_title").value;
+                            var content = document.getElementById("case_content").value;
+                            if (title == "" || content == "") {
+                                document.getElementById("time_err").innerHTML = `<p class="red-text">尚未填寫狀況</p>`;
                             }
                             else {
-                                if (time1 == null || time2 == null || time3 == null || time4 == null) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                if (date1 == false || date2 == false) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
                                 }
-                                else if (time1 == time2 || time3 == time4) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
+                                else if (date1 < t1 || date2 < t1) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
                                 }
                                 else {
-                                    if (time1 > time2 || time3 > time4) {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                    if (time1 == null || time2 == null || time3 == null || time4 == null) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                    }
+                                    else if (time1 == time2 || time3 == time4) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
                                     }
                                     else {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
-                                        //do repair action;
-                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
+                                        if (time1 > time2 || time3 > time4) {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                        }
+                                        else {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
+                                            //do repair action;
+                                            (new repair_do_public_repair_action('repair', 'do_public_repair_action', 'body')).run();
+                                        }
                                     }
                                 }
                             }
@@ -355,28 +377,34 @@ class repair_show_public_repair_page extends ActionHandler {
                             var date1 = document.getElementById("date1").value;
                             var date2 = document.getElementById("date2").value;
                             var date3 = document.getElementById("date3").value;
-
-                            if (date1 == false || date2 == false || date3 == false) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
-                            }
-                            else if (date1 < t1 || date2 < t1 || date3 < t1) {
-                                document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
+                            var title = document.getElementById("case_title").value;
+                            var content = document.getElementById("case_content").value;
+                            if (title == "" || content == "") {
+                                document.getElementById("time_err").innerHTML = `<p class="red-text">尚未填寫狀況</p>`;
                             }
                             else {
-                                if (time1 == null || time2 == null || time3 == null || time4 == null || time5 == null || time6 == null) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                if (date1 == false || date2 == false || date3 == false) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇日期</p>`;
                                 }
-                                else if (time1 == time2 || time3 == time4 || time5 == time6) {
-                                    document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
+                                else if (date1 < t1 || date2 < t1 || date3 < t1) {
+                                    document.getElementById("time_err").innerHTML = `<p class="red-text">日期已經過期</p>`;
                                 }
                                 else {
-                                    if (time1 > time2 || time3 > time4 || time5 > time6) {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                    if (time1 == null || time2 == null || time3 == null || time4 == null || time5 == null || time6 == null) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">還沒選擇時間</p>`;
+                                    }
+                                    else if (time1 == time2 || time3 == time4 || time5 == time6) {
+                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇相同</p>`;
                                     }
                                     else {
-                                        document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
-                                        //do repair action;
-                                        //(new repair_do_repair_action('repair','do_repair_action','body')).run()
+                                        if (time1 > time2 || time3 > time4 || time5 > time6) {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇有誤</p>`;
+                                        }
+                                        else {
+                                            document.getElementById("time_err").innerHTML = `<p class="red-text">時間選擇正確</p>`;
+                                            //do repair action;
+                                            (new repair_do_public_repair_action('repair', 'do_public_repair_action', 'body')).run();
+                                        }
                                     }
                                 }
                             }
@@ -396,7 +424,7 @@ class repair_show_public_repair_page extends ActionHandler {
             $('#' + this.position_id).html(msg);
         }
         // document.getElementById(this.position_id).innerHTML = str;
-        this.loadModuleScript(this.module, "do_repair_action");
+        this.loadModuleScript(this.module, "do_public_repair_action");
     }
     ajax_error(msg) {}
 }

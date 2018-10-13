@@ -41,6 +41,13 @@
             return $return_value;
 
         }
+        public function insert_public_household_user($user_profile_id,$household_profile_id,$public_facilities_id){
+            $sql ="INSERT INTO `household_user` (`id`, `user_profile_id`, `household_profile_id`, `warranty`, `public_facilities_id`) VALUES (NULL,$user_profile_id, $household_profile_id, NULL, $public_facilities_id)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+        }
+        
+        
     }
     
 ?>

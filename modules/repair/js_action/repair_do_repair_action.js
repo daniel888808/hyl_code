@@ -21,11 +21,6 @@ class repair_do_repair_action extends ActionHandler {
         this.addArgsbyid('date1');
         this.addArgsbyid('date2');
         this.addArgsbyid('date3');
-
-        this.addArgsbyid('pf1');
-
-
-
         //
         // this.addArgsbyid(src);
     }
@@ -46,6 +41,6 @@ class repair_do_repair_action extends ActionHandler {
         }
     }
     ajax_error(xhttp) {
-
+        console.log("error");
     }
 }
