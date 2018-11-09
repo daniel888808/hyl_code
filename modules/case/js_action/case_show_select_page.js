@@ -22,9 +22,9 @@ class case_show_select_page extends ActionHandler {
                 var da = new Date();
                 var ye = da.getFullYear();
                 content += `
-    <div class="container">
-        <div class="row " id="min-h">
-            <div class="col-12 px-0">
+    <div class="container mb-3">
+        <div class="row pt-0 mt-0" id="min-h">
+            <div class="col-12 px-0 ">
                 <table class="table table-striped text-center mt-3 " id="touchtable">
                     <thead>
                         <tr>
@@ -74,11 +74,11 @@ class case_show_select_page extends ActionHandler {
                 $(document).ready(function() {
                     $('#touchtable tbody tr').click(
                         function() {
-                            console.log("aa");
                             var tcase_id = $(this).data('case_id');
                             (new case_do_select_action('case', 'do_select_action', 'body', tcase_id)).run()
 
                         });
+
                 });
                 $('#' + this.position_id).html(content);
 

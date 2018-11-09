@@ -9,11 +9,16 @@ class notice_show_notice_page extends ActionHandler {
     }
 
     ajax_success(xhttp) {
-        var data = null;
-        var allDatas = JSON.parse(xhttp.responseText);
-        console.log(allDatas);
+        var data = '';
+        var color = '';
+        //var allDatas = JSON.parse(xhttp.responseText);
+        var json_str = xhttp.responseText;
+        console.log(json_str);
+        var obj = JSON.parse(json_str);
+        console.log(obj);
+        this.loadModuleScript("case", "do_select_action");
         try {
-            if (allDatas) {
+            if (obj) {
                 // for (var allData in allDatas['data_set']) {
                 //     console.log(allDatas['data_set'][allData]);
                 //     for (var oneDate in allDatas['data_set'][allData][3]) {
@@ -53,12 +58,34 @@ class notice_show_notice_page extends ActionHandler {
                 //     }
                 // }
                 // console.log(data);
-                for (var allData in allDatas) {
+
+                // for (var allData in obj) {
+                //     data += `    <div class="list-group font-weight-bold pt-0">
+                //                     <a onclick="(new notice_show_select_page('notice','show_select_page','body')).run()">
+                //                       <div class="list-group-item text-dark py-2 list-group-item-warning">${obj[allData]['$repairOne'][0]['repair_content']} <span class="float-right"> 維修單完成 ${obj[allData]['$caseOne']['end_datetime']} </span></div></a></div>`;
+                // }
+                // data = data.slice(4);
+                //console.log(obj['allnotice'][0]['type']);
+
+                for (var i = 0; i < obj['allnotice'].length; i++) {
+                    if (obj['allnotice'][i]['type'] == 'confirm') {
+                        color = 'warning';
+                    }
+                    else if (obj['allnotice'][i]['type'] == 'finish') {
+                        color = 'success';
+                    }
+                    else if (obj['allnotice'][i]['type'] == 'cancel') {
+                        color = 'danger';
+                    }
+
+
                     data += `    <div class="list-group font-weight-bold pt-0">
-                                    <a onclick="(new notice_show_select_page('notice','show_select_page','body')).run()">
-                                       <div class="list-group-item text-dark py-2 list-group-item-warning">${allDatas[allData]['$repairOne'][0]['repair_content']} <span class="float-right"> 維修單完成 ${allDatas[allData]['$caseOne']['end_datetime']} </span></div></a></div>`;
+                                                        <a onclick="(new case_do_select_action('case', 'do_select_action', 'body', ` + obj['allnotice'][i]['case_profile_id'] + `)).run()">
+                                                           <div class="list-group-item text-dark py-2 list-group-item-` + color + `">` + obj['allnotice'][i]['title'] + `</div></a></div>`;
                 }
-                data = data.slice(4);
+
+
+                //(new case_do_select_action('case', 'do_select_action', 'body', obj['allnotice'][i]['case_profile_id'])).run();
             }
             else {
                 data = "<h1>此帳號無維修通知</h1>";

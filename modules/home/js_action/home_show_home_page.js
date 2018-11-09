@@ -27,8 +27,8 @@ class home_show_home_page extends ActionHandler {
 
             if (obj['status_code'] === 1) {
                 (new news_do_select_action('news', 'do_select_action', 'news')).run();
-                var type = obj['pf'][0]["type"];
-                console.log(type);
+                var utype = obj['pf'][0]["type"];
+                console.log(utype);
 
 
                 var str = `
@@ -68,7 +68,7 @@ class home_show_home_page extends ActionHandler {
                     <button type="button"  class="btn btn-indigo m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Installationwork','3')).run()"><i class="fa fa-wrench" aria-hidden="true" ></i></br>安裝<br>工程</button>
                 </div>
                 <div class="mt-1">
-                    <button type="button"  class="btn btn-teal darken-3 m-0 w-32" onclick="(new repair_show_public_repair_page('repair','show_public_repair_page','body')).run()"><i class="fa fa-building" aria-hidden="true" ></i></br>公設<br>維修</button>
+                    <button type="button" id="pfbtn" class="btn btn-teal darken-3 m-0 w-32" click="checktype()"><i class="fa fa-building" aria-hidden="true" ></i></br>公設<br>維修</button>
                     <button type="button"  class="btn btn-red m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','Furnituremaintenance','5')).run()"><i class="fa fa-bed" aria-hidden="true" ></i></br>家具<br>維修</button> 
                     <button type="button"  class="btn btn-deep-purple darken-3 m-0 w-32" onclick="(new repair_show_repair_page('repair','show_repair_page','body','CleaningServices','6')).run()"><i class="fa fa-bug" aria-hidden="true" ></i></br>清潔<br>服務</button>
                 </div>
@@ -95,7 +95,7 @@ class home_show_home_page extends ActionHandler {
         </div>
 
         <!-- /.紀錄 -->
-        <div class="tab-pane fade" id="record" role="tabpanel">
+        <div class="tab-pane fade " id="record" role="tabpanel">
             
         </div>
     </div>
@@ -142,15 +142,23 @@ class home_show_home_page extends ActionHandler {
                 document.getElementById(this.position_id).innerHTML = str;
 
 
+                $(document).ready(function() {
+                    $("#pfbtn").click(function checktype() {
+                        if (utype == "pf_user") {
+                            (new repair_show_public_repair_page('repair', 'show_public_repair_page', 'body')).run();
+                        }
+                        else {
+                            alert("您沒有公設報修權限");
+                        }
 
-                $(#pfbtn).click(function checktype() {
-                    if (pf == "pf_user") {
 
-                    }
-                    else {}
+                    });
+
+
 
 
                 });
+
                 switch (this.blank) {
                     case 'home':
                         {
@@ -184,8 +192,8 @@ class home_show_home_page extends ActionHandler {
             }
             else if (obj['status_code'] == 5) {
                 console.log("dd");
-                (new home_show_home_page_E('home', 'show_home_page_E', 'body')).run();
-                var script = this.loadModuleScript("home", "show_home_page_E");
+                (new home_show_home_page('home', 'show_home_page', 'body')).run();
+                //var script = this.loadModuleScript("home", "show_home_page_E");
             }
             else {
                 console.log("Invalid status code " + obj['status_code']);

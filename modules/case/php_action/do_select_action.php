@@ -15,7 +15,7 @@
             $case_model = new case_model();
             $household_model= new household_model();
             $repair_model=new repair_model();
-            $household_id=$household_model->get_something_from_household_user("household_user_id","user_profile_id =".$user_id);
+            //$household_model->get_something_from_household_user("household_user_id","user_profile_id =".$user_id);
             $case = $case_model->get_something_from_case_profile("*","case_profile.id=".$cid);
             $repair_history_id=$repair_model->get_last_repair_history_id($cid);
             //最後一筆維修歷程
@@ -50,10 +50,5 @@
         }        
     }
 
-//SELECT * FROM `case_profile` A JOIN `notice` B ON B.case_profile_id=A.id JOIN household_user C ON A.household_user_id=C.id JOIN user_profile D ON C.user_profile_id=D.id WHERE D.id=$user_id
-//SELECT * FROM `case_profile` A JOIN `repair_type` B ON A.repair_type_id=B.id
-
-
-//
 ?>
 

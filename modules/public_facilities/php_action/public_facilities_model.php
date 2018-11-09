@@ -21,8 +21,8 @@
 
         }
         
-        public function insert_public_facilities($construction_project_id,$location){
-            $sql ="INSERT INTO `public_facilities` (`id`, `construction_project_id`, `location`) VALUES (NULL, '"+$construction_project_id+"', '"+$location+"')";
+        public function insert_new_public_facilities($construction_project_id,$location){
+            $sql ="INSERT INTO `public_facilities` (`id`, `construction_project_id`, `location`) VALUES (NULL, '$construction_project_id', '$location')";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
         }

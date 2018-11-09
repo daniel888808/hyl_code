@@ -60,9 +60,9 @@ class notice_show_select_page extends ActionHandler {
         <!-- Navbar -->
 
         <nav class="navbar bgdark text-white py-1">
-            <a class="navbar-brand text-right" href="testindex.html">
+            <div onclick="(new home_show_home_page('home','show_home_page','body','notice')).run()">
             <i class="fa fa-chevron-left text-white" aria-hidden="true"></i>
-        </a>
+        </div>
             <span class="h6 m-auto pr-3">
                    評價
             </span>

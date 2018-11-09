@@ -7,13 +7,14 @@ class user_profile_show_update_page extends ActionHandler {
         this.php = true;
     }
     ajax_success(xhttp) {
+        this.loadScript("include/lib/CryptoJSv3.1.2/rollups/aes.js", "CryptoJS_AES");
         // alert("u_show_update_in");
         try {
             var json_str = xhttp.responseText;
             var obj = JSON.parse(json_str);
             if (obj['status_code'] == 0) {
                 var ds = obj['data_set'];
-                console.log(json_str);
+                console.log(obj);
                 console.log("zz" + ds[0]['name']);
                 var msg = `        
             <!-- Navbar -->
@@ -68,26 +69,56 @@ class user_profile_show_update_page extends ActionHandler {
                 msg += ds[0]['account'];
                 msg += `">
             
-            <!-- Default password -->
-            <i class="fa fa-lock prefix grey-text text-center"></i>
-            <label for="exampleForm2">密碼</label>
-            <input type="password" id="password" class="form-control" value="`;
-                msg += ds[0]['password'];
-                msg += `">
+            
                 
 
             <div class="text-center mt-2">
                 <button class="btn btn-outline-blue darken-4 waves-effect" type="button" onclick="(new user_profile_do_update_action('user_profile','do_update_action','body')).run()">修改</button>
+                <button type="button" class="btn btn-outline-danger waves-effect" data-toggle="modal" data-target="#basicExampleModal">
+                                          修改密碼
+                                        </button>
             </div>
+            
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">修改密碼</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <!-- Default password -->
+                                    <i class="fa fa-lock prefix grey-text text-center"></i>
+                                    <label for="exampleForm2">請輸入舊密碼</label>
+                                    <input type="password" id="password" class="form-control" value="">
+                                    <!-- Default password -->
+                                    <i class="fa fa-lock prefix grey-text text-center"></i>
+                                    <label for="exampleForm2">請輸入新密碼</label>
+                                    <input type="password" id="newpassword" class="form-control" value="">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" id="cancel" data-dismiss="modal" onclick="(new user_profile_do_update_password('user_profile','do_update_password','U_password_error')).run()">更改密碼</button>
+                                    <div id="U_password_error"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
             <div id="U_update_error"></div>
         </div>
     </form>
 `;
                 document.getElementById(this.position_id).innerHTML = msg;
                 this.loadModuleScript("user_profile", "do_update_action");
+                this.loadModuleScript("user_profile", "do_update_password");
             }
             else {
-
+                // document.getElementById(this.position_id).innerHTML = "<div>此帳號沒有綁定建案， 請聯絡客服</div>";
+                alert('此帳號沒有綁定建案， 請聯絡客服');
+                (new home_show_home_page('home', 'show_home_page', 'body')).run()
             }
 
         }

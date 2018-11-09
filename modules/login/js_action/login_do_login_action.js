@@ -7,7 +7,11 @@ class login_do_login_action extends ActionHandler {
     prepareArgs() {
         this.php = true;
         this.addArgsbyid('account');
-        this.addArgsbyid('password');
+        var enpassword = $("#password").val();
+        //console.log(enpassword);
+        enpassword = CryptoJS.MD5(enpassword);
+        this.addArgs('password', enpassword);
+        //this.addArgsbyid('password');
     }
     ajax_success(xhttp) {
         try {
@@ -22,7 +26,7 @@ class login_do_login_action extends ActionHandler {
                 (new home_show_home_page('home', 'show_home_page', 'body')).run();
             }
             else if (obj['status_code'] === 1) {
-                (new home_show_home_page_E('home', 'show_home_page', 'body')).run();
+                (new home_show_home_page('home', 'show_home_page', 'body')).run();
             }
             else if (obj['status_code'] === -100) {
                 document.getElementById("login_err_msg").innerHTML = `<div><p class="font-small white-text d-flex justify-content-end"></p> <a href="#" class="gray-text ml-1 font-weight-bold">忘記密碼?</a></div><p class="red-text">帳號或密碼錯誤</p>`;

@@ -12,7 +12,7 @@
             $address = $post['address'];
             $phonenum = $post['phonenum'];
             $acc= $post['email'];
-            $password = $post['password'];
+            //$password = $post['password'];
             if(isset($_SESSION['useracc'])){
 			    $userid=$_SESSION['userid'];
 		    }
@@ -22,7 +22,7 @@
                 $return_value['status_code'] = 10;
                 $return_value['test'] = $acc;
                 $return_value['test1'] = $email;
-                $user_model->update_user_info($name,$phonenum,$acc,$password,$userid);
+                $user_model->update_user_other($name,$phonenum,$acc,$userid);
             }else{
                 $return_value['status_code'] = 20;//有其他同名帳號
             }

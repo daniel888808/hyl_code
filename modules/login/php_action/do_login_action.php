@@ -8,9 +8,9 @@
         public function actionPerformed(event_message $em) {
             $obj = user_profile_api::check_account($em);
             if($obj['status_code']== 0){ //0為登入成功 -100失敗(帳密錯誤)
-                if($obj['data_set'][0]['id']==4){
-                    $obj['status_code']= 1;
-                }
+                // if($obj['data_set'][0]['id']=4){
+                //     $obj['status_code']= 1;
+                // }
                 //return json_encode($obj);
                 /*
                  $tokenId    = base64_encode(openssl_random_pseudo_bytes(32));
@@ -74,9 +74,11 @@
             }
             session_start();
             $post = $em->getPost();
-            $_SESSION['userid'] = $obj['data_set'][0]['id'];
-            $_SESSION['user'] = $obj['data_set'][0]['name'];
-            $_SESSION['useracc'] = $obj['data_set'][0]['account'];
+            if($obj['data_set'][0]['id']!='' && $obj['data_set'][0]['id']!=null){
+                $_SESSION['userid'] = $obj['data_set'][0]['id'];
+                $_SESSION['user'] = $obj['data_set'][0]['name'];
+                $_SESSION['useracc'] = $obj['data_set'][0]['account'];
+            }
             return json_encode($obj);
         }        
     }

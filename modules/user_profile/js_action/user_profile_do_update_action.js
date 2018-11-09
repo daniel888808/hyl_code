@@ -10,7 +10,11 @@ class user_profile_do_update_action extends ActionHandler {
         this.addArgsbyid('address');
         this.addArgsbyid('phonenum');
         this.addArgsbyid('email');
-        this.addArgsbyid('password');
+        // var enpassword = $("#password").val();
+        // //console.log(enpassword);
+        // enpassword = CryptoJS.MD5(enpassword);
+        // this.addArgs('password', enpassword);
+        //this.addArgsbyid('password');
     }
     ajax_success(xhttp) {
         try {
